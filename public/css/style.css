@@ -1,0 +1,158 @@
+:root {
+  --bg-color: #2c2638;
+  --white-color: #ffffff;
+  --text-black: #333;
+  --light-grey: #777;
+  --border-color: #ddd;
+  --button-bg: #6d54b5;
+  --input-hover: #8980a5;
+  --field-color: #3c364c;
+  --text-origin-color: #6e687e;
+}
+
+
+body{
+    margin: 0;
+}
+.login-signup-page {
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+.login-box {
+    padding: 30px;
+}
+.login-box h2 {
+    color: var(--white-color);
+    margin-bottom: 25px;
+    text-align: left;
+}
+.login-signup-img img {
+    width: 100%;
+}
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+.input-group label {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--input-hover);
+}
+
+.formfield {
+    width: 100%;
+    padding: 12px 15px 12px 48px;
+    border: 1px solid var(--input-hover);
+    border-radius: 8px !important;
+    font-size: 16px;
+    box-sizing: border-box;
+    background: var(--field-color);
+    color: var(--white-color);
+}
+.formfield::placeholder{
+    color: var(--text-origin-color);
+}
+.input-group input:focus {
+    outline: none;
+    border-color: var(--input-hover);
+    box-shadow: 0 0 5px var(--input-hover);
+}
+button[type="submit"] {
+    background-color: var(--button-bg);
+    color: var(--white-color);
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+
+.options {
+    margin: 10px 0 30px;
+    font-size: 14px;
+    color: var(--white-color);
+    text-align: left;
+}
+.options a {
+    color: var(--input-hover);
+    transition: color 0.3s ease;
+    font-weight: 600;
+    text-decoration: underline;
+    outline: 0;
+}
+.options a:hover {
+    color: var(--dark-hover);
+}
+.options span {
+    margin: 0 10px;
+}
+.login-options p {
+    margin: 30px 0;
+    text-align: center;
+    color: var(--text-origin-color);
+    font-size: 13px;
+    position: relative;
+}
+.login-options p:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    height: 1px;
+    background: var(--text-origin-color);
+    width: 15%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.login-options p:after {
+    position: absolute;
+    content: "";
+    right: 0;
+    height: 1px;
+    background: var(--text-origin-color);
+    width: 15%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.redirect-btns .loginbtn {
+    border: 1px solid var(--input-hover);
+    text-decoration: none;
+    text-transform: capitalize;
+    padding: 12px 20px;
+    border-radius: 8px;
+    color: var(--input-hover);
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+.redirect-btns .loginbtn svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+.redirect-btns {
+    flex: 0 0 50%;
+    padding: 0 4px;
+}
+.flag-info {
+    background-color: var(--button-bg);
+    color: var(--white-color);
+    padding: 6px 20px;
+    width: max-content;
+    display: block;
+    margin: 0 0 20px;
+    font-size: 12px;
+    text-transform: capitalize;
+    font-weight: 500;
+    border-radius: 4px;
+    letter-spacing: 1px;
+}
