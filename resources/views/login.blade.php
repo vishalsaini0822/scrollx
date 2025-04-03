@@ -26,7 +26,8 @@
                          <div class="options">
                             <p><a href="#">Forget password?</a></p>
                         </div>
-                        <form action="#" method="POST">
+                        <form action="login" method="POST">
+                            @csrf
                             <div class="input-group">
                                 <label for="email"><i class="fas fa-envelope"></i></label>
                                 <input type="email" id="email" name="email" class="formfield" placeholder="Email Address" required>

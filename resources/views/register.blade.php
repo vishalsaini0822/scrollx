@@ -26,7 +26,12 @@
                          <div class="options">
                             <p><a href="#">Forget password?</a></p>
                         </div>
-                        <form action="#" method="POST">
+                        <form action="register" method="POST">
+                            @csrf
+                            <div class="input-group">
+                                <label for="name"><i class="fas fa-envelope"></i></label>
+                                <input type="text" id="name" name="name" class="formfield" placeholder="name" required>
+                            </div>
                             <div class="input-group">
                                 <label for="email"><i class="fas fa-envelope"></i></label>
                                 <input type="email" id="email" name="email" class="formfield" placeholder="Email Address" required>
@@ -35,7 +40,11 @@
                                 <label for="password"><i class="fas fa-lock"></i></label>
                                 <input type="password" id="password" name="password" class="formfield" placeholder="Password" required>
                             </div>
-                            <button type="submit">Sign in</button>
+                            <div class="input-group">
+                                <label for="password"><i class="fas fa-lock"></i></label>
+                                <input type="password" id="password" name="password_confirmation" class="formfield" placeholder="Confirm Password" required>
+                            </div>
+                            <button type="submit">Sign Up</button>
                         </form>
                         <div class="login-options">
                             <p>Not a member Register now or log in with Google</p>
