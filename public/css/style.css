@@ -1,5 +1,5 @@
 :root {
-  --bg-color: #2c2638;
+  --bg-color: #000000;
   --white-color: #ffffff;
   --text-black: #333;
   --light-grey: #777;
@@ -8,14 +8,677 @@
   --input-hover: #8980a5;
   --field-color: #3c364c;
   --text-origin-color: #6e687e;
+  --site-vibrant: #ff0000;
+  --site-green: #00EB8D;
 }
 
+body {
+    margin: 0;
+    background: var(--bg-color);
+    font-family: "Manrope", sans-serif;
+}
+/*HEADER CSS START*/
+.header-sec-inner {
+    padding: 38px 0;
+}
+.header-menu  ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+.header-menu ul li {
+    list-style: none;
+    padding: 0 35px;
+}
+.header-sec-inner {
+    padding: 38px 0;
+}
+.header-menu ul li a {
+    color: var(--white-color);
+    text-decoration: none;
+    font-size: 16px;
+}
+.language-switcher {
+    display: flex;
+    align-items: center;
+}
+.language-switcher span {
+    text-transform: uppercase;
+    margin-left: 8px;
+}
+.home-btn-text {
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--white-color);
+    text-decoration: none;
+}
+.header-login-btn {
+    margin-left: 44px;
+}
+.header-login-btn a:hover {
+    color: var(--site-vibrant);
+}
+.header-signup-btn {
+    margin-left: 19px;
+    background: var(--site-vibrant);
+    padding: 14px 22px;
+    border-radius: 50px;
+}
+.header-signup-btn:hover{
+    background-color: var(--white-color);
+}
+.header-login-btn a:hover, .header-signup-btn:hover a {
+    color: var(--site-vibrant);
+}
+.btn-style {
+    border: 1px solid #FFFFFF33;
+    padding: 15px 60px;
+    border-radius: 50px;
+    display: block;
+    width: max-content;
+    margin: 58px auto 0;
+    color: var(--white-color);
+    text-decoration: none;
+    font-size: 16px;
+}
+.btn-style:hover {
+    background: var(--site-vibrant);
+    color: var(--white-color);
+}
 
-body{
+/*BANNER CSS START*/
+.hero-banner {
+    padding: 90px 0 0;
+    text-align: center;
+    background-image: url("/img/hero-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.hero-banner h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 103px;
+    line-height: 121px;
+    letter-spacing: -2px;
+    color: var(--white-color);
+}
+.hero-banner p {
+    max-width: 855px;
+    margin: 38px auto;
+    color: var(--white-color);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 31.2px;
+    text-align: center;
+}
+.video-bg img {
+    border-radius: 16px;
+}
+.video-bg {
+    margin: 36px 0;
+}
+.bannerblw-sec {
+    padding-bottom: 144px;
+}
+/* END CREDITS START */
+.end-credits-inner {
+    position: relative;
+    padding-top: 40px;
+}
+.end-credits-inner:before {
+    position: absolute;
+    content: "";
+    top: 0;
+    background: #E8E8E866;
+    height: 1px;
+    width: 90%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+.credits-col {
+    flex: 0 0 40%;
+}
+.credits-text {
+    flex: 0 0 60%;
+}
+.credit-title {
+    position: relative;
+}
+.credits-text h2 {
+    font-weight: 400;
+    font-size: 56px;
+    line-height: 67.2px;
+    text-transform: uppercase;
+    color: var(--white-color);
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    padding-top: 42px;
     margin: 0;
 }
+.prop-img1 {
+    position: absolute;
+    right: 70px;
+}
+.credits-text h2 .in-span {
+    display: flex;
+    text-align: right;
+    position: relative;
+    right: 100px;
+    align-items: center;
+    gap: 0 20px;
+    justify-content: end;
+}
+.prop-img2 img {
+    position: absolute;
+    left: 0;
+    top: -40px;
+}
+.star-imgs {
+    gap: 0 14px;
+}
+.credits-text h2 .last-step {
+    position: relative;
+    left: -90px;
+}
+.credit-title p {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 31.2px;
+    text-align: right;
+    color: rgb(255 255 255 / 70%);
+    max-width: 638px;
+    padding: 20px 100px 0 0;
+    position: relative;
+    right: 100px;
+}
+.credits-info {
+    padding: 60px 0;
+    gap: 0 100px;
+}
+.credits-inn {
+    border: 1px solid #FFFFFF40;
+    padding: 40px;
+    border-radius: 22px;
+    background: #ffffff12;
+    position: relative;
+    flex: 0 0 28%;
+}
+.credits-icon {
+    background: var(--site-green);
+    padding: 12px;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+}
+.credits-title h6 {
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 122%;
+    text-transform: capitalize;
+    font-family: "Inter", sans-serif;
+    color: var(--white-color);
+    padding-bottom: 30px;
+    margin: 0;
+}
+.credits-title  p {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 139%;
+    color: var(--white-color);
+}
+.credits-inn-one:before {
+    position: absolute;
+    content: "";
+    background-image: url("/img/curve-arrow.png");
+    width: 248px;
+    height: 27px;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -129px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+}
+.credits-inn-two:before {
+    position: absolute;
+    content: "";
+    background-image: url("/img/curve-bend.png");
+    width: 230px;
+    height: 27px;
+    top: 54%;
+    transform: translateY(-50%);
+    right: -144px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+}
+/*JOIN FREE CSS*/
+.join-free-title {
+    max-width: 704px;
+}
+.join-free-inn {
+    padding: 40px 0;
+}
+.join-free-title h2 {
+    font-weight: 400;
+    font-size: 42px;
+    line-height: 48.75px;
+    font-family: "Inter", sans-serif;
+    color: var( --white-color);
+}
+.join-free-title p {
+    background: var(--site-vibrant);
+    width: max-content;
+    padding: 0 10px;
+    color: var( --white-color);
+    margin: 50px 0;
+}
+.join-btn {
+    flex: 1 1;
+    border-top: 1px solid #FFFFFF80;
+    margin-left: 20px;
+}
+.join-btn a {
+    margin: 50px 0 0;
+    background: var(--site-vibrant);
+}
+/*Customizable Templates CSS START*/
+.inner-wrap01 {
+    max-width: 565px;
+    margin: 0 auto;
+}
+.customizable-title {
+    font-weight: 700;
+    font-size: 72px;
+    line-height: 81px;
+    letter-spacing: -2px;
+    color: var( --white-color);
+}
+.customizable-title span {
+    color: var(--site-vibrant);
+}
+.customizable-template-sec p {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 31.2px;
+    color: #FFFFFFB2;
+    margin: 27px 0 90px;
+}
+/*HOW IT WORKS CSS START*/
+.howit-works-sec {
+    padding: 180px 0 0;
+}
+.howit-works-steps {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 0 0 80px;
+}
+.howit-works-sec .description {
+    font-weight: 400;
+    font-size: 53px;
+    line-height: 64px;
+    letter-spacing: -2px;
+    color: var(--white-color);
+    padding-right: 110px;
+    margin: 0;
+}
+.right-panel {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--site-vibrant);
+}
+.left-panel {
+    z-index: 9;
+    position: relative;
+    max-width: 1000px;
+    padding: 50px 0 90px;
+}
+.sync-credits-badge {
+    background: var(--site-vibrant);
+    width: max-content;
+    color: var( --white-color);
+    padding: 4px 20px;
+    transform: rotate(-10deg);
+    margin-bottom: 15px;
+}
+.howit-works-sec h2 {
+    font-weight: 700;
+    font-size: 72px;
+    line-height: 81px;
+    letter-spacing: -2px;
+    text-align: center;
+    padding-bottom: 110px;
+    color: var( --white-color);
+}
+.howit-works-sec h2 span {
+    color: var( --site-green);
+}
+.green-panel {
+    background: var(--site-green);
+}
+.loading-btn a {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px 0;
+    border-radius: 10px;
+    border: 3px solid var( --white-color);
+    background: var(--site-vibrant);
+}
+.howit-works-steps-img {
+    position: absolute;
+    left: -50px;
+}
+.step02 .sync-credits-badge {
+    transform: unset;
+    margin: 0 0 15px auto;
+}
+.left-panel.step02 {
+    text-align: right;
+    margin: 0 0 0 auto;
+    max-width: 745px;
+}
+.howit-works-sec .step02 .description {
+    padding: 0;
+}
+
+/* Enjoy unlimited renders CSS */
+.more-things {
+    background-image: url(/img/more-thingbg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+.more-things .btn-style {
+    background: var(--site-vibrant);
+}
+.cm-title h2 {
+    font-weight: 700;
+    font-size: 62px;
+    line-height: 81px;
+    letter-spacing: -2px;
+    color: var( --white-color);
+}
+.more-things-title {
+    padding: 108px 0px;
+}
+.more-things-title h2{
+    text-align: center;
+}
+.love-quote span {
+    color: var(--site-vibrant);
+    font-weight: 400;
+    font-size: 43px;
+    line-height: 48.75px;
+    font-family: "Inter", sans-serif;
+    position: relative;
+    display: block;
+}
+.love-quote span:after {
+    position: absolute;
+    content: "";
+    width: 38%;
+    background: var( --white-color);
+    height: 1px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 55px;
+}
+.count-sec {
+    display: flex;
+    gap: 0 40px;
+    padding: 100px 0;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+.count-col {
+    display: flex;
+    margin: 0 0 40px;
+    flex: 0 0 30%;
+}
+.count-col-lft {
+    max-width: 115px;
+    flex: 0 0 115px;
+}
+.count-col-rgt {
+    flex: 1 1;
+    padding-left: 46px;
+}
+.count-in span {
+    font-weight: 400;
+    font-size: 106px;
+    line-height: 110px;
+    color: var( --white-color);
+    font-family: "Inter", sans-serif;
+}
+.count-text span {
+    background: var(--site-vibrant);
+    max-width: 244px;
+    display: block;
+    padding: 0 0 0 5px;
+    color: var( --white-color);
+}
+.count-text p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: "Inter", sans-serif;
+    color: var( --white-color);
+    padding-top: 18px;
+    margin: 0;
+}
+.sliding-scroll-text p {
+    font-weight: 500;
+    font-size: 92px;
+    line-height: 95.16px;
+    font-family: "Inter", sans-serif;
+    color: var( --site-green);
+    white-space: pre;
+    margin: 0;
+}
+
+
+/*PLAN PRICE CSS START*/
+.padding-space {
+    padding: 100px 0;
+}
+.plain-text {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 0px;
+    color: var( --white-color);
+    margin: 12px 0 0;
+}
+.pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.pricing-table th:first-child {
+    color: #0070E0;
+    text-align: left;
+    padding: 0 0 20px  26px;
+    vertical-align: bottom;
+}
+.pricing-table th, .pricing-table td {
+    padding: 15px;
+    text-align: center;
+}
+.pricing-table tbody tr td {
+    border: 1px solid #96B1CD;
+}
+.pricing-table th {
+    font-weight: bold;
+    padding-bottom: 60px;
+}
+.plan-name {
+    font-weight: bold;
+    padding: 10px 0;
+    color: var( --white-color);
+}
+.plan-price-container {
+    background: var(--site-vibrant);
+    color: #fff;
+    padding: 8px 0;
+    font-weight: bold;
+    border-radius: 5px;
+    min-width: 100px;
+}
+.plan-price {
+    font-size: 15px;
+}
+.pricing-table tbody tr td:first-child {
+    color: var( --white-color);
+    text-align: left;
+    padding-left: 26px;
+}
+.feature {
+    text-align: left;
+}
+
+/*FAQ SECTION CSS START*/
+.faq-sec {
+    background-image: url("/img/bg-001.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.homesocial-links {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 0 30px;
+    justify-content: end;
+}
+.homesocial-links li {
+    list-style: none;
+}
+.homesocial-links li a {
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var( --white-color);
+    color: var( --white-color);
+}
+.home-faq .accordion {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+}
+.home-faq .accordion .accordion-item {
+    flex: 0 0 30%;
+    background: transparent;
+    border-bottom: 1px solid var( --white-color);
+    margin: 0 26px 26px;
+}
+.home-faq {
+    margin-top: 50px;
+}
+.home-faq .accordion-button {
+    background: transparent;
+    padding: 20px 0;
+    color: var( --white-color);
+    box-shadow: none;
+}
+.home-faq .accordion .accordion-item:nth-child(2n) {
+    margin-right: 0;
+}
+.home-faq .accordion-body {
+    color: var( --white-color);
+    padding-left: 0;
+}
+.home-faq .accordion-button::after {
+    background-image: unset;
+    content: "\2b";
+    text-align: center;
+}
+.home-faq .accordion-button:not(.collapsed)::after {
+    background-image: unset;
+}
+/*SUBSCRIBE SECTION*/
+.subscribe-sec  h6 {
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 81px;
+    letter-spacing: -2px;
+    text-align: center;
+    color: var( --white-color);
+    margin: 0;
+}
+.subs-email {
+    background: var(--site-vibrant);
+    max-width: 928px;
+    margin: 22px auto;
+    padding: 20px 0;
+    text-align: center;
+}
+.subs-email a {
+    font-weight: 700;
+    font-size: 100px;
+    line-height: 81px;
+    letter-spacing: -2px;
+    text-align: center;
+    color: var( --white-color);
+    text-decoration-thickness: 2px;
+}
+.subscribe-sec p {
+    text-align: center;
+}
+
+/*FOOTER CSS START*/
+.footer {
+    background: var(--site-vibrant);
+    padding: 100px 0 40px;
+}
+.footer-logo {
+    text-align: center;
+}
+.footer-links {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 60px 0;
+    gap: 0 30px;
+}
+.footer-links li {
+    list-style: none;
+}
+.footer-links li a {
+    text-decoration: none;
+    color: var( --white-color);
+}
+.footer-bottom p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: var( --white-color);
+    margin: 0;
+}
+.footer-bottom .fb-first-text {
+    text-align: left;
+}
+.footer-bottom .fb-last-text {
+    text-align: right;
+}
+
+
+
+
+
 .login-signup-page {
-    font-family: "Montserrat", sans-serif;
     background-color: var(--bg-color);
     display: flex;
     justify-content: center;
