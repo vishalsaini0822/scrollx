@@ -706,29 +706,29 @@ body {
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--input-hover);
+    color: var(--site-green);
 }
 
 .formfield {
     width: 100%;
     padding: 12px 15px 12px 48px;
-    border: 1px solid var(--input-hover);
+    border: 1px solid #FFFFFF33;
     border-radius: 8px !important;
     font-size: 16px;
     box-sizing: border-box;
-    background: var(--field-color);
-    color: var(--white-color);
+    background: #FFFFFF33;
+    color: #FFFFFF33;
 }
 .formfield::placeholder{
-    color: var(--text-origin-color);
+    color: #FFFFFF33;
 }
 .input-group input:focus {
     outline: none;
-    border-color: var(--input-hover);
-    box-shadow: 0 0 5px var(--input-hover);
+    border-color: var(--site-green);
+    box-shadow: 0 0 5px var(--site-green);
 }
 button[type="submit"] {
-    background-color: var(--button-bg);
+    background-color: var(--site-vibrant);
     color: var(--white-color);
     padding: 12px 20px;
     border: none;
@@ -747,7 +747,7 @@ button[type="submit"] {
     text-align: left;
 }
 .options a {
-    color: var(--input-hover);
+    color: var(--site-vibrant);
     transition: color 0.3s ease;
     font-weight: 600;
     text-decoration: underline;
@@ -762,16 +762,16 @@ button[type="submit"] {
 .login-options p {
     margin: 30px 0;
     text-align: center;
-    color: var(--text-origin-color);
     font-size: 13px;
     position: relative;
+    color: var(--white-color);
 }
 .login-options p:before {
     position: absolute;
     content: "";
     left: 0;
     height: 1px;
-    background: var(--text-origin-color);
+    background: #FFFFFF33;
     width: 15%;
     top: 50%;
     transform: translateY(-50%);
@@ -787,12 +787,12 @@ button[type="submit"] {
     transform: translateY(-50%);
 }
 .redirect-btns .loginbtn {
-    border: 1px solid var(--input-hover);
+    border: 1px solid #FFFFFF33;
     text-decoration: none;
     text-transform: capitalize;
     padding: 12px 20px;
     border-radius: 8px;
-    color: var(--input-hover);
+    color: var(--white-color);
     display: block;
     width: 100%;
     text-align: center;
@@ -807,7 +807,7 @@ button[type="submit"] {
     padding: 0 4px;
 }
 .flag-info {
-    background-color: var(--button-bg);
+    background-color: var(--site-green);
     color: var(--white-color);
     padding: 6px 20px;
     width: max-content;

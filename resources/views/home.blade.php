@@ -30,10 +30,10 @@
                             <a href="#">Home</a>
                         </li>
                         <li>
-                            <a href="#">Features</a>
+                            <a href="#customizabletemplate">Features</a>
                         </li>
                         <li>
-                            <a href="#">Pricing</a>
+                            <a href="#chooseprice">Pricing</a>
                         </li>
                         <li>
                             <a href="#">Contact</a>
@@ -162,7 +162,7 @@
     <!-- JOIN FREE END -->
 
     <!-- Customizable Templates START-->
-    <div class="customizable-template-sec">
+    <div class="customizable-template-sec" id="customizabletemplate">
         <div class="container">
             <div class="inner-wrap01">
                 <h2 class="customizable-title">Customizable<br><span>Templates</span></h2>
@@ -346,7 +346,7 @@
 
 
     <!-- PRICEPLAN HTML START -->
-    <div class="plan-price padding-space">
+    <div class="plan-price padding-space" id="chooseprice">
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
