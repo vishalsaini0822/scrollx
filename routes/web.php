@@ -43,3 +43,14 @@ Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkE
 
 // Route::get('/reset-password', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
 // Route::post('/reset-password', [PasswordResetController::class, 'reset'])->name('password.update');
+
+
+
+Route::get('/test-db', function () {
+    try {
+        \DB::connection()->getPdo();
+        return "DB Connected ✅";
+    } catch (\Exception $e) {
+        return "DB ERROR ❌: " . $e->getMessage();
+    }
+});
