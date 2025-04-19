@@ -37,5 +37,8 @@ RUN chown -R www-data:www-data /var/www
 # Expose port
 EXPOSE 8000
 
+CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=10000
+
+
 # Start Laravel server
 CMD php artisan serve --host=0.0.0.0 --port=8000
