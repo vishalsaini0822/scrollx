@@ -41,5 +41,6 @@ COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 # Expose the port
 EXPOSE 10000
 
-# Start services
-CMD php artisan migrate --force && service nginx start && php-fpm
+# At runtime, run migrations then spin up PHP's built‑in server on the Render $PORT
+CMD php artisan migrate --force \
+  && php -S 0.0.0.0:${PORT} -t public

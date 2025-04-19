@@ -27,3 +27,4 @@ services:
         value: myuser
       - key: DB_PASSWORD
         value: mypassword
+
