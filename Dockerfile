@@ -15,6 +15,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 COPY . .
 
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 RUN composer install --no-dev --optimize-autoloader \
     && php artisan config:cache \
     && php artisan route:cache \
