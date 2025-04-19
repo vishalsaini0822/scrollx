@@ -1,4 +1,4 @@
-# Use official PHP image
+# Use the official PHP image with FPM
 FROM php:8.2-fpm
 
 # Set working directory
@@ -23,19 +23,23 @@ RUN apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     libssl-dev \
     mariadb-client \
+    nginx \
     && docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Copy existing application directory contents
+# Copy application code
 COPY . /var/www
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www
 
-# Expose port
+# Copy nginx config
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# Expose the port
 EXPOSE 10000
 
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT}
-
+# Start services
+CMD php artisan migrate --force && service nginx start && php-fpm
