@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mydbhost.render.com  # Your MySQL host from Render
+      MYSQL_ROOT_PASSWORD: mypassword # Your MySQL password
+    ports:
+      - "8080:80"
+    restart: always
