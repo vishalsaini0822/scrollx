@@ -75,7 +75,7 @@
                                     </svg>google</a>
                             </div>
                             <div class="redirect-btns">
-                                <a href="{{url('register')}}" class="loginbtn">sign up now</a>
+                                <a href="{{url('register')}}" class="loginbtn"><i class="fa fa-sign-in" aria-hidden="true"></i> sign up now</a>
                             </div>
                         </div>
                     </div>
