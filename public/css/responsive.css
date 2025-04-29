@@ -1,0 +1,320 @@
+@media only screen and (max-width: 1400px){
+    .howit-works-sec .description {
+        max-width: 900px;
+        font-size: 40px;
+        padding-right: 162px;
+    }
+    .howit-works-sec .step02 .description {
+        padding-left: 40px;
+    }
+}
+
+
+@media only screen and (max-width: 1200px){
+    .howit-works-steps-img img {
+        max-width: 800px;
+    }
+}
+
+@media only screen and (max-width: 1100px){
+    .howit-works-steps {
+        flex-direction: column-reverse;
+        padding: 0 15px;
+    }
+    .howit-works-sndsteps {
+        flex-direction: column;
+    }
+    .howit-works-steps .right-panel {
+        position: static;
+        width: 100%;
+        height: 300px;
+    }
+    .howit-works-sec .description {
+        padding-right: 0;
+        max-width: 100%;
+        text-align: center;
+    }
+    .howit-works-steps-img {
+        position: static;
+    }
+    .howit-works-sec .step02 .description {
+        padding-left: 0;
+    }
+    .howit-works-steps .left-panel.step02 {
+        max-width: 100%;
+    }
+    .left-panel {
+        padding-bottom: 0;
+    }
+    .sync-credits-badge, .step02 .sync-credits-badge {
+        transform: unset;
+        margin: 0 auto 20px;
+    }
+    .count-col-rgt {
+        padding-left: 20px;
+    }
+    .credits-info {
+        gap: 0 20px;
+    }
+}
+
+
+@media only screen and (max-width: 1024px){
+    .header-menu {
+        display: none;
+    }
+    .mobile-menu {
+        display: block;
+    }
+    .header-menu.menuactive {
+        position: absolute;
+        display: block;
+        top: 100%;
+        width: 100%;
+        left: 0;
+        background: #2c2c2c;
+    }
+    .header-menu.menuactive ul {
+        flex-direction: column;
+    }
+    .header-menu ul li {
+        padding: 0 15px;
+    }
+    .header-menu ul li a {
+        padding: 18px 20px;
+        display: block;
+        border-bottom: 1px solid #dddddd0f;
+    }
+    .header-menu ul li:last-child a {
+        border-bottom: unset;
+    }
+    .end-credits-inner {
+        padding-top: 0;
+    }
+}
+
+@media only screen and (max-width: 992px){
+    .hero-banner h1 {
+        font-size: 80px;
+        line-height: normal;
+    }
+    .howit-works-sec {
+        padding: 180px 0 0;
+    }
+    .count-sec {
+        gap: 0;
+        justify-content: space-between;
+        flex-direction: column;
+        padding: 50px 0 0;
+    }
+    .subs-email a {
+        font-size: 80px;
+    }
+    .credit-title p {
+        padding: 0;
+    }
+    .count-col-lft {
+        max-width: 80px;
+        flex: 0 0 80px;
+    }
+    .love-quote span:after {
+        display: none;
+    }
+    .love-quote {
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 768px){
+    .count-in span {
+        font-size: 75px;
+        line-height: normal;
+    }
+    .credits-col {
+        flex: 0 0 100%;
+        width: 100%;
+        text-align: center;
+        margin: 40px 0 0;
+    }
+    .howit-works-steps-img img {
+        width: 100%;
+    }
+    .credits-col {
+        flex: 0 0 100%;
+    }
+    .footer-logo img {
+        max-width: 300px;
+    }
+    .end-credits-inner {
+        flex-direction: column-reverse;
+    }
+    .credit-title p {
+        max-width: 100%;
+        right: 0;
+        text-align: center;
+        margin: 10px 0 0;
+    }
+}
+
+
+@media only screen and (max-width: 767px){
+    .header-menu ul li a {
+        padding: 14px 10px;
+        font-size: 12px;
+    }
+    .header-sec-inner {
+        padding: 15px 0;
+    }
+    .logo img {
+        max-width: 110px;
+    }
+    .header-signup-btn {
+        padding: 2px 10px 5px;
+    }
+    .home-btn-text {
+        font-size: 11px;
+    }
+    .header-sec-inner {
+        padding: 15px 0;
+    }
+    .credits-text h2 .last-step {
+        left: 0;
+    }
+    .credits-text h2 .in-span {
+        right: 0;
+    }
+    .credits-info {
+        flex-direction: column;
+        padding: 30px 0;
+    }
+    .credits-inn-one:before, .credits-inn-two:before {
+        display: none;
+    }
+    .join-free-inn {
+        flex-direction: column;
+    }
+    .subs-email a {
+        font-size: 40px;
+        line-height: normal;
+    }
+    .customizable-title {
+        font-size: 45px;
+        line-height: normal;
+        text-align: center;
+    }
+    .prop-img2 img {
+        max-width: 200px;
+    }
+    .hero-banner h1, .credits-text h2{
+        font-size: 40px;
+        line-height: normal;
+    }
+    .hero-banner p {
+        max-width: 100%;
+        font-size: 16px;
+        line-height: normal;
+        margin: 20px 0;
+    }
+    .btn-style {
+        margin-top: 40px;
+    }
+    .credits-inn {
+        margin-bottom: 30px;
+    }
+    .credits-inn:last-child {
+        margin: 0;
+    }
+    .join-free-title h2 {
+        text-align: center;
+        font-size: 38px;
+        line-height: normal;
+    }
+    .join-free-title p {
+        margin: 30px auto 50px;
+    }
+    .customizable-template-sec p {
+        text-align: center;
+        margin: 30px 0;
+    }
+    .join-btn {
+        margin: 0;
+        text-align: center;
+    }
+    .join-btn a {
+        margin: 50px auto 0;
+    }
+    .howit-works-sec {
+        padding: 60px 0 0;
+    }
+    .howit-works-sec h2 {
+        font-size: 45px;
+        line-height: normal;
+        padding-bottom: 30px;
+    }
+    .howit-works-sec .description {
+        line-height: normal;
+        font-size: 30px;
+    }
+    .howit-works-sndsteps {
+        margin: 0 0 30px;
+    }
+    .howit-works-steps{
+        margin: 0 0 40px;
+    }
+    .more-things-title h2 {
+        font-size: 34px;
+        line-height: normal;
+    }
+    .more-things-title {
+        padding: 100px 0 30px;
+    }
+    .love-quote span {
+        font-size: 28px;
+    }
+    .cm-title h2 {
+        font-size: 45px;
+        text-align: center;
+        line-height: 1em;
+    }
+    .plain-text {
+        text-align: center;
+    }
+    .padding-space {
+        padding: 50px 0;
+    }
+    .home-faq .accordion .accordion-item {
+        flex: 0 0 100%;
+        margin: 0;
+    }
+    .homesocial-links {
+        margin: 30px 0 0;
+        justify-content: center;
+    }
+    .home-faq {
+        margin-top: 20px;
+    }
+    .subs-email {
+        max-width: 100%;
+        padding: 10px 0;
+    }
+    .sliding-scroll-text p {
+        font-size: 45px;
+        line-height: normal;
+    }
+    .footer-bottom .fb-first-text {
+        text-align: center;
+    }
+    .footer-bottom .fb-last-text {
+        text-align: center;
+        margin: 10px 0 0;
+    }
+}
+
+
+@media only screen and (max-width: 360px){
+    .home-btn-text {
+        font-size: 9px;
+    }
+    .home-btns {
+        gap: 0 10px;
+    }
+}

@@ -7,6 +7,7 @@
     <title>Homepage</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
@@ -41,15 +42,18 @@
                     </ul>
                 </div>
                 <div class="home-btns d-flex justify-content-between align-items-center">
-                    <div class="language-switcher">
-                        <img src="img/globe.png" alt="globe">
-                        <span class="home-btn-text">en</span>
-                    </div>
                     <div class="header-login-btn">
                         <a href="{{url('login')}}" class="home-btn-text">Login</a>
                     </div>
                     <div class="header-signup-btn">
                         <a href="{{url('register')}}" target="_blank" class="home-btn-text">Start for fee →</a>
+                    </div>
+                    <div class="mobile-menu">
+                        <div class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -196,7 +200,7 @@
                 </div>
             </div>
         </div>
-        <div class="howit-works-steps">
+        <div class="howit-works-steps howit-works-sndsteps">
             <div class="howit-works-steps-img">
                 <img src="img/steps03.png" alt="step03">
             </div>
@@ -565,8 +569,8 @@
     </div>
     <!-- FOOTER SECTION HTML END -->
 
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
-
 </html>
