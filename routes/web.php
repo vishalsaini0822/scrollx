@@ -5,6 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SheetController;
+use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\UserController;
 Route::get('welcome', function () {
     return view('welcome');
 });
@@ -48,6 +51,28 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::post('update-project-status', [ProjectController::class, 'changeStatus']);
     Route::post('projects/{id}/copy', [ProjectController::class, 'copyProject'])->name('projects.copy');
+    Route::get('/test-google-sheet', [SheetController::class, 'createSheet']);
+    Route::get('/test-google-sheet/{id}', [SheetController::class, 'showSheet'])->name('sheet.show');
+
+    // User CRUD routes
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('users', [UserController::class, 'store'])->name('users.store');
+    Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
+    Route::get('users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('users/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+    // Template CRUD routes
+    Route::get('templates', [TemplateController::class, 'index'])->name('templates.index');
+    Route::get('templates/create', [TemplateController::class, 'create'])->name('templates.create');
+    Route::post('templates', [TemplateController::class, 'store'])->name('templates.store');
+    Route::get('templates/{id}', [TemplateController::class, 'show'])->name('templates.show');
+    Route::get('templates/{id}/edit', [TemplateController::class, 'edit'])->name('templates.edit');
+    Route::put('templates/{id}', [TemplateController::class, 'update'])->name('templates.update');
+    Route::delete('templates/{id}', [TemplateController::class, 'destroy'])->name('templates.destroy');
+
+    // Password Reset Routes
 });
 
 Route::get('/test-db', function () {
