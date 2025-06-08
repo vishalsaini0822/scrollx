@@ -68,10 +68,13 @@
                                 {{ \Carbon\Carbon::parse($project->created_at)->format('D M d Y - H:i:s') }}
                             </td>
                             <td class="options" style="white-space:nowrap; border:none; background:none;">
-                                <i class="glyphicon glyphicon-pencil edit-project" title="Edit" style="margin-right:10px; cursor:pointer; color:#fff;"></i>
-                                <i class="glyphicon glyphicon-duplicate copy-project" title="Copy" style="margin-right:10px; cursor:pointer; color:#fff;"></i>
-                                <i class="glyphicon glyphicon-play-circle render-project" title="Render" style="margin-right:10px; cursor:pointer; color:#fff;"></i>
-                                <i class="glyphicon glyphicon-trash delete-project" title="Delete" style="cursor:pointer; color:#fff;"></i>
+                                <i class="fa fa-pencil-square-o edit-project" aria-hidden="true" title="Edit" style="margin-right:10px; cursor:pointer; color:#fff;"></i>
+                                <i class="fa fa-clone copy-project" title="Copy" aria-hidden="true" style="margin-right:10px; cursor:pointer; color:#fff;"></i>
+
+                                <i class="fa fa-file-text-o render-project" title="Render" style="margin-right:10px; cursor:pointer; color:#fff;" aria-hidden="true"></i>
+
+                                <i class="fa fa-trash-o delete-project" title="Delete" style="cursor:pointer; color:#fff;" aria-hidden="true"></i>
+
                             </td>
                             <td style="border:none; background:none;">
                                 <button class="btn btn-primary btn-xs edit-project-btn"
@@ -95,13 +98,7 @@
                     <input type="hidden" name="project_id" id="form-project-id" value="">
                     <input type="hidden" name="template_id" id="form-template-id" value="">
                     <div class="modal-header" style="border-bottom: none;">
-                        <button type="button" class="close" data-dismiss="modal"
-                            style="color: #fff; opacity: 1;">&times;</button>
                         <div style="display: flex; align-items: center; gap: 12px;">
-                            <div
-                                style="background: #23232b; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border: 2px solid #444;">
-                                <span style="font-size: 24px; color: #fff;">🗂️</span>
-                            </div>
                             <div>
                                 <h4 class="modal-title select_template_hearder " id="modal-title-id"
                                     style="margin: 0; color: #fff; font-size: 28px; font-weight: 700;">Create Scroll Project</h4>
@@ -150,7 +147,7 @@
                         </div>
                     </div>
                     <div class="modal-footer" style="border-top: none;">
-                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                        <button type="button" class="btn btn-default" data-bs-dismiss="modal"
                             style="background: none; color: #fff; border: 1px solid #444; border-radius: 8px; padding: 8px 24px;">Cancel</button>
                         <button type="submit" class="btn btn-primary"
                             style="background: #6c5ce7; border: none; border-radius: 8px; padding: 8px 32px;">Create</button>
