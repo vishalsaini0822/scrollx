@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #1e1f26;
+    color: #fff;
+}
+
+header {
+    background: #2c2e3a;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.slider-wrapper {
+    padding: 20px;
+}
+
+.slick-slide {
+    margin: 0 10px;
+}
+
+.slide {
+    background: #000;
+    border-radius: 10px;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+.project-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    opacity: 0;
+    transition: all .5s ease;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.project-slider .slide:hover span,
+.project-slider .slide:hover span:before {
+    opacity: 1;
+}
+
+.title-active {
+    opacity: 1;
+}
+
+.project-slider .slide span:before {
+    background: linear-gradient(90deg, #212226, #ead2b04a);
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.select_template_hearder {
+    color: black;
+}
