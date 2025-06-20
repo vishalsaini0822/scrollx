@@ -71,8 +71,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('templates/{id}/edit', [TemplateController::class, 'edit'])->name('templates.edit');
     Route::put('templates/{id}', [TemplateController::class, 'update'])->name('templates.update');
     Route::delete('templates/{id}', [TemplateController::class, 'destroy'])->name('templates.destroy');
-
-    // Password Reset Routes
+    
+    
+    Route::get('credit', [ProjectController::class, 'credit'])->name('dashboard.credit');
 });
 
 Route::get('/test-db', function () {

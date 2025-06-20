@@ -37,6 +37,13 @@ function selectTemplate(value) {
     $('#form-template-id').val(value);
     $('#save_template').modal('show');
 }
+function showContent(tabId) {
+    document.querySelectorAll('.content-block').forEach(el => el.style.display = 'none');
+    document.getElementById(tabId).style.display = 'block';
+
+    document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+}
 
 $(document).ready(function() {
     // Set default end credit type

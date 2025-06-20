@@ -77,10 +77,10 @@
 
                             </td>
                             <td style="border:none; background:none;">
-                                <button class="btn btn-primary btn-xs edit-project-btn"
+                                <a href="{{route('dashboard.credit')}}" class="btn btn-primary btn-xs"
                                     style="background: #6c5ce7; border: none; border-radius: 20px; padding: 10px 22px;">
                                     <span class="glyphicon glyphicon-chevron-right" style="font-size: 20px;"></span>
-                                </button>
+                                </a>
                             </td>
                         </tr>
                         @endforeach
