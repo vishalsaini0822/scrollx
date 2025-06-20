@@ -1,6 +1,6 @@
 @include('layouts.header')
 
-<main>
+<main class="dashboard-main">
     @yield('content')
 </main>
 
