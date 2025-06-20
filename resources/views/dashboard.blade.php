@@ -8,20 +8,34 @@
             <h2>CHOOSE YOUR NEW PROJECT</h2>
             <div class="project-slider">
                 <div class="slide" onclick="selectTemplate(1);"><span class="project-title title-active">CustomProject</span></div>
-                <div class="slide" onclick="selectTemplate(2);"><span class="project-title">Vintage</span></div>
-                <div class="slide" onclick="selectTemplate(3);"><span class="project-title">Elegant</span></div>
-                <div class="slide" onclick="selectTemplate(4);"><span class="project-title">Retro</span></div>
-                <div class="slide" onclick="selectTemplate(5);"><span class="project-title">Minimal</span></div>
-                <div class="slide" onclick="selectTemplate(6);"><span class="project-title">Velvet</span></div>
-                <div class="slide" onclick="selectTemplate(7);"><span class="project-title">Urban</span></div>
-                <div class="slide" onclick="selectTemplate(8);"><span class="project-title">Classic</span></div>
-                <div class="slide" onclick="selectTemplate(9);"><span class="project-title">Sci Fi</span></div>
-                <div class="slide" onclick="selectTemplate(10);"><span class="project-title">Bold</span></div>
-                <div class="slide" onclick="selectTemplate(11);"><span class="project-title">Timeless</span></div>
-                <div class="slide" onclick="selectTemplate(12);"><span class="project-title">Modern</span></div>
-                <div class="slide" onclick="selectTemplate(13);"><span class="project-title">Dramatic</span></div>
-                <div class="slide" onclick="selectTemplate(14);"><span class="project-title">Ancient</span></div>
-                <div class="slide" onclick="selectTemplate(15);"><span class="project-title">Nostalgic</span></div>
+                <div class="slide" onclick="selectTemplate(2);">
+                    <span class="project-title">Vintage</span></div>
+                <div class="slide" onclick="selectTemplate(3);">
+                    <span class="project-title">Elegant</span></div>
+                <div class="slide" onclick="selectTemplate(4);">
+                    <span class="project-title">Retro</span></div>
+                <div class="slide" onclick="selectTemplate(5);">
+                    <span class="project-title">Minimal</span></div>
+                <div class="slide" onclick="selectTemplate(6);">
+                    <span class="project-title">Velvet</span></div>
+                <div class="slide" onclick="selectTemplate(7);">
+                    <span class="project-title">Urban</span></div>
+                <div class="slide" onclick="selectTemplate(8);">
+                    <span class="project-title">Classic</span></div>
+                <div class="slide" onclick="selectTemplate(9);">
+                    <span class="project-title">Sci Fi</span></div>
+                <div class="slide" onclick="selectTemplate(10);">
+                    <span class="project-title">Bold</span></div>
+                <div class="slide" onclick="selectTemplate(11);">
+                    <span class="project-title">Timeless</span></div>
+                <div class="slide" onclick="selectTemplate(12);">
+                    <span class="project-title">Modern</span></div>
+                <div class="slide" onclick="selectTemplate(13);">
+                    <span class="project-title">Dramatic</span></div>
+                <div class="slide" onclick="selectTemplate(14);">
+                    <span class="project-title">Ancient</span></div>
+                <div class="slide" onclick="selectTemplate(15);">
+                    <span class="project-title">Nostalgic</span></div>
             </div>
         </div>
 
@@ -90,24 +104,20 @@
         </div>
     </div>
 
-    <div class="modal fade" id="save_template" role="dialog">
+    <div class="modal fade mymodal" id="save_template" role="dialog">
         <div class="modal-dialog">
-            <div class="modal-content" style="background: #23232b; color: #fff; border-radius: 16px;">
+            <div class="modal-content">
                 <form id="createProjectForm"  autocomplete="off">
                     @csrf
                     <input type="hidden" name="project_id" id="form-project-id" value="">
                     <input type="hidden" name="template_id" id="form-template-id" value="">
                     <div class="modal-header" style="border-bottom: none;">
-                        <div style="display: flex; align-items: center; gap: 12px;">
-                            <div>
-                                <h4 class="modal-title select_template_hearder " id="modal-title-id"
-                                    style="margin: 0; color: #fff; font-size: 28px; font-weight: 700;">Create Scroll Project</h4>
-                                <div style="color: #bbaaff; font-size: 14px;">Project names can be changed anytime.
-                                </div>
-                            </div>
+                        <div class="modal-top">
+                            <h4 class="modal-title select_template_hearder " id="modal-title-id">Create Scroll Project</h4>
+                            <span>Project names can be changed anytime.</span>
                         </div>
                     </div>
-                    <div class="modal-body" style="padding-top: 18px;">
+                    <div class="modal-body">
                         <div class="form-group">
                             <label for="template_name" class="select_template_hearder" style="color: #fff;">Project
                                 Name</label>
@@ -116,8 +126,8 @@
                                 style="background: #18181f; color: #fff; border: 1px solid #444;" />
                             <span class="help-block" id="nameError" style="color:#ff7675; display:none;"></span>
                         </div>
-                        <div class="form-group" style="margin-bottom: 25px;">
-                            <label for="end_credits_type" style="margin-bottom: 10px; display: block; color: #fff;">What
+                        <div class="form-group">
+                            <label for="end_credits_type">What
                                 type of End Credits?</label>
                             <div
                                 style="display: flex; align-items: center; background: #18181f; border-radius: 12px; border: 1px solid #444; width: fit-content;">
@@ -135,7 +145,7 @@
                             <label for="resolution" style="margin-bottom: 10px; display: block; color: #fff;">Choose
                                 Resolution</label>
                             <select class="form-control" id="resolution" name="resolution"
-                                style="width: 220px; display: inline-block; background: #18181f; color: #fff; border: 1px solid #444;">
+                                style="display: inline-block; background: #18181f; color: #fff; border: 1px solid #444;">
                                 <option value="">Select a resolution</option>
                                 <option value="1280x720">1280 x 720</option>
                                 <option value="1920x1080">1920 x 1080</option>
