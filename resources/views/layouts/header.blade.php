@@ -19,19 +19,21 @@
 </head>
 
 <body>
-    <header>
-        <nav style="background: #f6f6f6; border-radius: 8px; margin: 30px 20px 0 20px; padding: 10px 30px; display: flex; align-items: center;">
-            <a href="{{ url('/dashboard') }}" style="font-size: 2rem; font-weight: bold; color: #555; text-decoration: none; margin-right: 40px; letter-spacing: 1px;">
-                DASHBOARD
-            </a>
-            @if (!empty(Auth()->user()) && !empty(Auth()->user()->is_admin) && Auth()->user()->is_admin == 1)
-                <a href="{{ url('/users') }}" style="font-size: 2rem; font-weight: bold; color: #888; text-decoration: none; margin-right: 30px;">
-                    Users
+    <header class="dashboard-header">
+        <div class="container">
+            <nav>
+                <a href="{{ url('/dashboard') }}">
+                    dashboard
                 </a>
-                <a href="{{ url('/templates') }}" style="font-size: 2rem; font-weight: bold; color: #888; text-decoration: none;">
-                    Templates
-                </a>
-                
-            @endif
-        </nav>
+                @if (!empty(Auth()->user()) && !empty(Auth()->user()->is_admin) && Auth()->user()->is_admin == 1)
+                    <a href="{{ url('/users') }}">
+                        Users
+                    </a>
+                    <a href="{{ url('/templates') }}">
+                        Templates
+                    </a>
+                    
+                @endif
+            </nav>
+        </div>
     </header>
