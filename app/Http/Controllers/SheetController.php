@@ -9,7 +9,7 @@ class SheetController extends Controller
     public function createSheet(GoogleSheetService $sheetService)
     {
         // Create new Google Sheet
-        $sheet = $sheetService->createSheet('My Laravel Sheet');
+        $sheet = $sheetService->createSheet('My scrollx.io Sheet');
         
         // Write some sample data
         $sheetService->writeData($sheet['spreadsheetId'], 'Sheet1!A1', [

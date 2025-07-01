@@ -12,20 +12,43 @@ class TemplateController extends Controller
     public function index()
     {
         $templates = Template::all();
-        return response()->json($templates);
+        return view('admin.templates.index', compact('templates'));
     }
 
     // Store a newly created template
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'image' => 'required|string|max:255',
+            'template_name' => 'required|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $template = Template::create($validated);
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('templates', 'public');
+            $validated['image'] = $imagePath;
+        }
 
-        return response()->json($template, 201);
+        
+        
+        $sheetService = app(\App\Services\GoogleSheetService::class);
+        $sheet = $sheetService->createSheet($validated['template_name'] . ' Sheet');
+        dd($sheet);
+        $sheetService->writeData($sheet['spreadsheetId'], 'Sheet1!A1', [
+        ['Template Name', 'Image Path'],
+        [$validated['template_name'], $validated['image']],
+        ]);
+        dd($sheet['url']);
+        // Store the sheet URL in the template model
+        // if (isset($sheet['url'])) {
+        // $template->update(['sheet_url' => $sheet['url']]);
+        // }
+
+
+        // $template = Template::create([
+        //     'template_name' => $validated['template_name'],
+        //     'image' => $validated['image'],
+        // ]);
+        // return response()->json($template, 201);
     }
 
     // Display the specified template

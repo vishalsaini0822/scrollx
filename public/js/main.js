@@ -591,3 +591,221 @@ $(function() {
     });
 
 });
+
+
+
+
+// Template js
+$(function() {
+    var templateModal = null, successModal = null, errorModal = null;
+    if (document.getElementById('templateModal')) {
+        templateModal = new bootstrap.Modal(document.getElementById('templateModal'));
+    }
+    if (document.getElementById('successModal')) {
+        successModal = new bootstrap.Modal(document.getElementById('successModal'));
+    }
+    if (document.getElementById('errorModal')) {
+        errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+    }
+
+    // Add input labels dynamically (if not present)
+    if ($('#templateName').prev('label').length === 0) {
+        $('#templateName').before('<label for="templateName" class="form-label" style="color:#23232b;">Name</label>');
+    }
+    // if ($('#templateSheetUrl').prev('label').length === 0) {
+    //     $('#templateSheetUrl').before('<label for="templateSheetUrl" class="form-label" style="color:#23232b;">Sheet URL</label>');
+    // }
+    if ($('#templateImage').prev('label').length === 0) {
+        $('#templateImage').before('<label for="templateImage" class="form-label" style="color:#23232b;">Image</label>');
+    }
+
+    // Open Add Template Modal
+    $('#addTemplateBtn').on('click', function() {
+        $('#templateModalLabel').css('color','black').text('Add Template');
+        $('#templateForm')[0].reset();
+        $('#templateId').val('');
+        $('#imagePreview').hide();
+        clearValidation();
+        templateModal.show();
+    });
+
+    // Open Edit Template Modal
+    $('.editTemplateBtn').on('click', function() {
+        var row = $(this).closest('tr');
+        $('#templateModalLabel').css('color','black').text('Edit Template');
+        $('#templateId').val(row.data('id'));
+        $('#templateName').val(row.data('name'));
+        // $('#templateSheetUrl').val(row.data('sheet-url'));
+        $('#templateImage').val('');
+        $('#imagePreview').hide();
+        if(row.data('image')) {
+            $('#imagePreview').attr('src', '/storage/' + row.data('image')).show();
+        }
+        clearValidation();
+        templateModal.show();
+    });
+
+    // Image preview
+    $('#templateImage').on('change', function() {
+        const [file] = this.files;
+        if (file) {
+            $('#imagePreview').attr('src', URL.createObjectURL(file)).show();
+        }
+    });
+
+    // Clear validation errors
+    function clearValidation() {
+        $('#templateForm input, #templateForm textarea').removeClass('is-invalid');
+        $('#templateNameError, #templateImageError').text('');
+    }
+
+    // Clear validation message on input focus
+    $('#templateName').on('input focus', function() {
+        $(this).removeClass('is-invalid');
+        $('#templateNameError').text('');
+    });
+    // $('#templateSheetUrl').on('input focus', function() {
+    //     $(this).removeClass('is-invalid');
+    //     $('#templateSheetUrlError').text('');
+    // });
+    $('#templateImage').on('change focus', function() {
+        $(this).removeClass('is-invalid');
+        $('#templateImageError').text('');
+    });
+
+    // Browser-side validation
+    function validateTemplateForm(isEdit) {
+        var valid = true;
+        var name = $('#templateName').val().trim();
+        // var sheetUrl = $('#templateSheetUrl').val().trim();
+        var image = $('#templateImage')[0].files[0];
+        clearValidation();
+
+        // Name validation
+        if (name.length < 3) {
+            $('#templateName').addClass('is-invalid');
+            $('#templateNameError').text('Name must be at least 3 characters.');
+            valid = false;
+        }
+
+        // Image validation (only for add)
+        if (!isEdit && !image) {
+            $('#templateImage').addClass('is-invalid');
+            $('#templateImageError').text('Please select an image.');
+            valid = false;
+        }
+
+        return valid;
+    }
+
+    // AJAX form submit with browser validation
+    $('#templateForm').on('submit', function(e) {
+        e.preventDefault();
+        var isEdit = !!$('#templateId').val();
+        if (!validateTemplateForm(isEdit)) return;
+
+        var id = $('#templateId').val();
+        var url = id ? '/templates/' + id : '/templates';
+        var method = id ? 'POST' : 'POST';
+        var formData = new FormData(this);
+        if (id) {
+            formData.append('_method', 'PUT');
+        }
+
+        $.ajax({
+            url: url,
+            type: method,
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function() {
+                templateModal.hide();
+                $('#successMessage').css('color','black').text(isEdit ? 'Template updated successfully!' : 'Template added successfully!');
+                successModal.show();
+                setTimeout(function() { location.reload(); }, 1500);
+            },
+            error: function(xhr) {
+                if (xhr.status === 422 && xhr.responseJSON) {
+                    var errors = xhr.responseJSON.errors || {};
+                    var hasFieldError = false;
+                    if (errors.name) {
+                        $('#templateName').addClass('is-invalid');
+                        $('#templateNameError').text(errors.name[0]);
+                        hasFieldError = true;
+                    }
+                    // if (errors.sheet_url) {
+                    //     $('#templateSheetUrl').addClass('is-invalid');
+                    //     $('#templateSheetUrlError').text(errors.sheet_url[0]);
+                    //     hasFieldError = true;
+                    // }
+                    if (errors.image) {
+                        $('#templateImage').addClass('is-invalid');
+                        $('#templateImageError').text(errors.image[0]);
+                        hasFieldError = true;
+                    }
+                    if (!hasFieldError && xhr.responseJSON.message) {
+                        $('#errorMessage').text(xhr.responseJSON.message);
+                        templateModal.hide();
+                        errorModal.show();
+                    }
+                } else {
+                    $('#errorMessage').text('Failed to save template. Please try again.');
+                    templateModal.hide();
+                    errorModal.show();
+                }
+            }
+        });
+    });
+
+    // Delete Template
+    $('.deleteTemplateBtn').on('click', function() {
+        var row = $(this).closest('tr');
+        var templateId = row.data('id');
+        var templateName = row.data('name');
+        $('#deleteTemplateModal').remove();
+        $('body').append(`
+            <div class="modal fade" id="deleteTemplateModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-sm" role="document">         
+                    <div class="modal-content" style="background:#23232b; color:#fff; border-radius:12px; text-align:center;">
+                        <div class="modal-header" style="border-bottom:none;">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1); opacity:1;"></button>
+                        </div>
+                        <div class="modal-body" style="padding:32px 24px;">
+                            <div style="font-size:24px; font-weight:700; margin-bottom:10px;">Are you sure!</div>
+                            <div style="font-size:16px; margin-bottom:20px;">
+                                You want to delete template<br>
+                                (<span style="color:#bbaaff;">${$('<div>').text(templateName).html()}</span>)?
+                            </div>
+                            <div style="display:flex; justify-content:center; gap:16px;">
+                                <button type="button" class="btn btn-default" data-bs-dismiss="modal" style="background:none; color:#fff; border:1px solid #444; border-radius:8px; padding:8px 24px;">Cancel</button>
+                                <button type="button" class="btn btn-primary" id="confirmDeleteTemplateBtn" style="background:#6c5ce7; border:none; border-radius:8px; padding:8px 32px;">Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `);
+        $('#deleteTemplateModal').modal('show');
+        $('#confirmDeleteTemplateBtn').off('click').on('click', function() {
+            $.ajax({
+                url: '/templates/' + templateId,
+                type: 'DELETE',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function() {
+                    $('#deleteTemplateModal').modal('hide');
+                    row.remove();
+                    $('#successMessage').css('color','black').text('Template deleted successfully!');
+                    successModal.show();
+                    setTimeout(function() { location.reload(); }, 1500);
+                },
+                error: function() {
+                    $('#deleteTemplateModal').modal('hide');
+                    $('#errorMessage').text('Failed to delete template. Please try again.');
+                    errorModal.show();
+                }
+            });
+        });
+    });
+});

@@ -59,17 +59,17 @@
               </div>
               <div class="modal-body">
                   <div class="mb-3">
-                      <label for="userName" class="form-label">Name</label>
+                      <label for="userName" class="form-label text-black">Name</label>
                       <input type="text" class="form-control" id="userName" name="name">
                       <div class="invalid-feedback" id="nameError"></div>
                   </div>
                   <div class="mb-3">
-                      <label for="userEmail" class="form-label">Email</label>
+                      <label for="userEmail" class="form-label text-black">Email</label>
                       <input type="email" class="form-control" id="userEmail" name="email">
                       <div class="invalid-feedback" id="emailError"></div>
                   </div>
                   <div class="mb-3" id="passwordField">
-                      <label for="userPassword" class="form-label">Password</label>
+                      <label for="userPassword" class="form-label text-black">Password</label>
                       <input type="password" class="form-control" id="userPassword" name="password">
                       <div class="invalid-feedback" id="passwordError"></div>
                   </div>
@@ -99,7 +99,4 @@
 
 @push('scripts')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-
-</script>
 @endpush
