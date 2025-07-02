@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Template;
 class ProjectController extends Controller
 {
     /**
@@ -27,7 +28,8 @@ class ProjectController extends Controller
         }  
 
         $projects = Project::where('user_id', Auth::id())->orderBy('id','desc')->get();
-        return view('dashboard', ['projects' => $projects]);
+        $template = Template::get();
+        return view('dashboard', ['projects' => $projects,'template'=>$template]);
     }
 
     /**

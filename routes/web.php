@@ -15,14 +15,6 @@ Route::get('/', function () {
     return view('home');
 });
 
-// Route::get('login', function () {
-//     return view('login');
-// })->name('login');
-
-// Route::get('register', function () {
-//     return view('register');
-// });
-
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 
@@ -41,6 +33,8 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'handleGoogleC
 
 Route::get('/forgot-password', [PasswordResetController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/test-google-sheet', [SheetController::class, 'createSheet']);
+Route::get('/test-google-sheet/{id}', [SheetController::class, 'showSheet'])->name('sheet.show');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [ProjectController::class, 'create'])->name('dashboard');
@@ -51,8 +45,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::post('update-project-status', [ProjectController::class, 'changeStatus']);
     Route::post('projects/{id}/copy', [ProjectController::class, 'copyProject'])->name('projects.copy');
-    Route::get('/test-google-sheet', [SheetController::class, 'createSheet']);
-    Route::get('/test-google-sheet/{id}', [SheetController::class, 'showSheet'])->name('sheet.show');
 
     // User CRUD routes
     Route::get('users', [UserController::class, 'index'])->name('users.index');
@@ -64,13 +56,13 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
     // Template CRUD routes
-    Route::get('templates', [TemplateController::class, 'index'])->name('templates.index');
+    Route::get('templatelist', [TemplateController::class, 'index'])->name('templates.index');
     Route::get('templates/create', [TemplateController::class, 'create'])->name('templates.create');
-    Route::post('templates', [TemplateController::class, 'store'])->name('templates.store');
+    Route::post('addtemplates', [TemplateController::class, 'store'])->name('templates.store');
     Route::get('templates/{id}', [TemplateController::class, 'show'])->name('templates.show');
     Route::get('templates/{id}/edit', [TemplateController::class, 'edit'])->name('templates.edit');
     Route::put('templates/{id}', [TemplateController::class, 'update'])->name('templates.update');
-    Route::delete('templates/{id}', [TemplateController::class, 'destroy'])->name('templates.destroy');
+    Route::delete('template/{id}', [TemplateController::class, 'destroy'])->name('templates.destroy');
     
     
     Route::get('credit', [ProjectController::class, 'credit'])->name('dashboard.credit');

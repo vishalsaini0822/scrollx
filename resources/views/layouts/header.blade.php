@@ -29,7 +29,7 @@
                     <a href="{{ url('/users') }}">
                         Users
                     </a>
-                    <a href="{{ url('/templates') }}">
+                    <a href="{{ url('/templatelist') }}">
                         Templates
                     </a>
                     

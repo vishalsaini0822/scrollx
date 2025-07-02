@@ -14,9 +14,7 @@ class Template extends Model
         'template_name',
         'image',
         'sheet_url',
-        'created_at',
-        'updated_at',
-        'deleted_at'
+        'spreadsheetId'
     ];
 
     protected $dates = ['deleted_at'];

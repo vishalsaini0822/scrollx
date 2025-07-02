@@ -28,10 +28,10 @@
                     <tr data-id="{{ $template->id }}" data-name="{{ $template->template_name }}" data-sheet-url="{{ $template->sheet_url }}" data-image="{{ $template->image }}">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $template->template_name }}</td>
-                        <td>{{ $template->sheet_url }}</td>
+                        <td><a href="{{ $template->sheet_url }}" target="_blank">View</a></td>
                         <td>
                             @if($template->image)
-                                <img src="{{ asset('storage/' . $template->image) }}" alt="Template Image" width="60">
+                                <img src="{{ asset($template->image) }}" alt="Template Image" width="60">
                             @else
                                 <span class="text-muted">No image</span>
                             @endif

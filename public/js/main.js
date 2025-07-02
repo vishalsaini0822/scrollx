@@ -639,7 +639,7 @@ $(function() {
         $('#templateImage').val('');
         $('#imagePreview').hide();
         if(row.data('image')) {
-            $('#imagePreview').attr('src', '/storage/' + row.data('image')).show();
+            $('#imagePreview').attr('src',  row.data('image')).show();
         }
         clearValidation();
         templateModal.show();
@@ -703,9 +703,14 @@ $(function() {
         e.preventDefault();
         var isEdit = !!$('#templateId').val();
         if (!validateTemplateForm(isEdit)) return;
+        if(isEdit){
+            $('#saveTemplateBtn').text('Updating...').prop('disabled', true);
+        }else{
+            $('#saveTemplateBtn').text('Saving...').prop('disabled', true);
+        }
 
         var id = $('#templateId').val();
-        var url = id ? '/templates/' + id : '/templates';
+        var url = id ? '/templates/' + id : '/addtemplates';
         var method = id ? 'POST' : 'POST';
         var formData = new FormData(this);
         if (id) {
@@ -788,7 +793,7 @@ $(function() {
         $('#deleteTemplateModal').modal('show');
         $('#confirmDeleteTemplateBtn').off('click').on('click', function() {
             $.ajax({
-                url: '/templates/' + templateId,
+                url: '/template/' + templateId,
                 type: 'DELETE',
                 data: {
                     _token: $('meta[name="csrf-token"]').attr('content')
