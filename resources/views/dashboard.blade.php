@@ -7,7 +7,9 @@
         <div class="slider-wrapper">
             <h2>CHOOSE YOUR NEW PROJECT</h2>
             <div class="project-slider">
-                fore
+                {{-- @foreach ($template as $item)
+                    
+                @endforeach --}}
                 <div class="slide" onclick="selectTemplate(1);"><span class="project-title title-active">CustomProject</span></div>
                 <div class="slide" onclick="selectTemplate(2);">
                     <span class="project-title">Vintage</span></div>

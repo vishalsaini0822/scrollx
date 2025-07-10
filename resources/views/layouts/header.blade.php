@@ -20,20 +20,21 @@
 
 <body>
     <header class="dashboard-header">
+        @if (request()->path() !== 'credit')
         <div class="container">
             <nav>
-                <a href="{{ url('/dashboard') }}">
-                    dashboard
+            <a href="{{ url('/dashboard') }}">
+                dashboard
+            </a>
+            @if (!empty(Auth()->user()) && !empty(Auth()->user()->is_admin) && Auth()->user()->is_admin == 1)
+                <a href="{{ url('/users') }}">
+                Users
                 </a>
-                @if (!empty(Auth()->user()) && !empty(Auth()->user()->is_admin) && Auth()->user()->is_admin == 1)
-                    <a href="{{ url('/users') }}">
-                        Users
-                    </a>
-                    <a href="{{ url('/templatelist') }}">
-                        Templates
-                    </a>
-                    
-                @endif
+                <a href="{{ url('/templatelist') }}">
+                Templates
+                </a>
+            @endif
             </nav>
         </div>
+        @endif
     </header>
