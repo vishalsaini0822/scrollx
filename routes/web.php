@@ -54,41 +54,93 @@ Route::get('/api/test-direct-sheet', function() {
         $gid = '299738390';
         $csvUrl = "https://docs.google.com/spreadsheets/d/{$spreadsheetId}/export?format=csv&gid={$gid}";
         
+        // Try to fetch from Google Sheets
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $csvUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         
         $data = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $error = curl_error($ch);
         curl_close($ch);
         
+        // Log the attempt for debugging
+        \Log::info('Google Sheets fetch attempt', [
+            'url' => $csvUrl,
+            'httpCode' => $httpCode,
+            'error' => $error,
+            'dataLength' => $data ? strlen($data) : 0
+        ]);
+        
+        // If successful and data doesn't contain "Sign in" (indicates auth required)
+        if (!$error && $httpCode === 200 && $data && !str_contains($data, 'Sign in')) {
+            \Log::info('Successfully fetched Google Sheets data');
+            return response($data)->header('Content-Type', 'text/csv');
+        }
+        
         if ($error || $httpCode !== 200) {
-            // Fallback to sample data for testing
-            $sampleData = "Instructions,,,\n";
-            $sampleData .= "Leave blank rows between blocks,,,\n";
-            $sampleData .= "block_name,role,name,\n";
-            $sampleData .= ",,,\n";
-            $sampleData .= "CAST,,,\n";
-            $sampleData .= ",Actor,John Doe,\n";
-            $sampleData .= ",Actress,Jane Smith,\n";
-            $sampleData .= ",Director,Mike Johnson,\n";
-            $sampleData .= ",,,\n";
-            $sampleData .= "CREW,,,\n";
-            $sampleData .= ",Producer,Sarah Wilson,\n";
-            $sampleData .= ",Cinematographer,Tom Brown,\n";
-            $sampleData .= ",Editor,Lisa Garcia,\n";
-            $sampleData .= ",,,\n";
-            $sampleData .= "MUSIC,,,\n";
-            $sampleData .= ",Composer,David Lee,\n";
-            $sampleData .= ",Sound Designer,Emily Chen,\n";
-            $sampleData .= ",,,\n";
-            $sampleData .= "SPECIAL THANKS,,,\n";
-            $sampleData .= ",Executive Producer,Robert Taylor,\n";
-            $sampleData .= ",Location Manager,Maria Rodriguez,\n";
+            // Fallback to match your actual Google Sheet structure
+            $sampleData = "block_name,role,name,logo,blurb,song_title,song_details\n";
+            $sampleData .= "HOW TO USE THE CREDIT SHEET?,,,,,\n";
+            $sampleData .= ",,,,,\n";
+            $sampleData .= "Use ROLE + NAME blocks for common credits like cast and crew,The NAME ONLY block type is useful for groups of people who share the same credit,With a LOGO block you can pull from our logo library or upload your own custom images,The BLURB blocks are useful for legal copyright or dedications,The SONG block type is useful for any licensed material like music stock footage or works of art\n";
+            $sampleData .= ",,,,,\n";
+            $sampleData .= "DCA,,,,,\n";
+            $sampleData .= ",Line Producer,Winnie Bong,,,\n";
+            $sampleData .= ",Unit Production Manager,Healin Keon,,,\n";
+            $sampleData .= ",First Assistant Director,Samantha Gao,,,\n";
+            $sampleData .= ",Second Assistant Director,Cutter White,,,\n";
+            $sampleData .= ",,,,,\n";
+            $sampleData .= "CAST,,,,,\n";
+            $sampleData .= ",HAYOUNG,Ji-young Yoo,,,\n";
+            $sampleData .= ",APPA,Jung Joon Ho,,,\n";
+            $sampleData .= ",MRS. CHOI,Jessica Whang,,,\n";
+            $sampleData .= ",UMMA,Abin Andrews,,,\n";
+            $sampleData .= ",ARA,Erin Choi,,,\n";
+            $sampleData .= ",HAGWON RECEPTIONIST,Chris Yejin Cha,,,\n";
+            $sampleData .= ",JOON,Phinehas Yoon,,,\n";
+            $sampleData .= ",MRS. MOON,Kim Ellis,,,\n";
+            $sampleData .= ",HENRY,Teddy Lee,,,\n";
+            $sampleData .= ",ROSE,Erin Yoo,,,\n";
+            $sampleData .= ",SAM,Paul Syre,,,\n";
+            $sampleData .= ",WOMAN,Euna Jo,,,\n";
+            $sampleData .= ",SUKI KIM,Sook Hyung Yang,,,\n";
+            $sampleData .= ",CHRISTINE,Chloe Jin Lee,,,\n";
+            $sampleData .= ",OLD WOMAN IN SAUNA,Jein Kim,,,\n";
+            $sampleData .= ",RAON,May Hong,,,\n";
+            $sampleData .= ",MRS. SONG,Clara Young,,,\n";
+            $sampleData .= ",,,,,\n";
+            $sampleData .= "STUNTS,,,,,\n";
+            $sampleData .= ",Stunt Coordinator,Alex Johnson,,,\n";
+            $sampleData .= ",Stunt Double,Maria Santos,,,\n";
+            $sampleData .= ",,,,,\n";
+            $sampleData .= "CHOREOGRAPHER,,,,,\n";
+            $sampleData .= ",Choreographer,David Kim,,,\n";
+            $sampleData .= ",Assistant Choreographer,Lisa Park,,,\n";
+            $sampleData .= ",,,,,\n";
+            $sampleData .= "ADDITIONAL PRODUCER,,,,,\n";
+            $sampleData .= ",Executive Producer,Michael Chen,,,\n";
+            $sampleData .= ",Associate Producer,Sarah Liu,,,\n";
+            $sampleData .= ",,,,,\n";
+            $sampleData .= "CAMERA,,,,,\n";
+            $sampleData .= ",Director of Photography,James Wong,,,\n";
+            $sampleData .= ",Camera Operator,Tony Martinez,,,\n";
+            $sampleData .= ",,,,,\n";
+            $sampleData .= "AERIAL,,,,,\n";
+            $sampleData .= ",Drone Operator,Kevin Zhang,,,\n";
+            $sampleData .= ",Aerial Coordinator,Emma Thompson,,,\n";
+            $sampleData .= ",,,,,\n";
+            $sampleData .= "CONTINUITY,,,,,\n";
+            $sampleData .= ",Script Supervisor,Rachel Green,,,\n";
+            $sampleData .= ",Continuity Assistant,Mark Davis,,,\n";
+            $sampleData .= ",,,,,\n";
+            $sampleData .= "PRODUCTION SOUND,,,,,\n";
+            $sampleData .= ",Sound Recordist,Ben Taylor,,,\n";
+            $sampleData .= ",Boom Operator,Nina Rodriguez,,,\n";
             
             return response($sampleData)->header('Content-Type', 'text/csv');
         }
@@ -99,7 +151,6 @@ Route::get('/api/test-direct-sheet', function() {
         return response()->json(['error' => $e->getMessage()], 500);
     }
 });
-// Route::post('/save-block-settings', [SheetController::class, 'saveBlockSettings'])->name('save.block.settings');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [ProjectController::class, 'create'])->name('dashboard');
