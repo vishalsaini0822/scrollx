@@ -7,38 +7,17 @@
         <div class="slider-wrapper">
             <h2>CHOOSE YOUR NEW PROJECT</h2>
             <div class="project-slider">
-                {{-- @foreach ($template as $item)
-                    
-                @endforeach --}}
-                <div class="slide" onclick="selectTemplate(1);"><span class="project-title title-active">CustomProject</span></div>
-                <div class="slide" onclick="selectTemplate(2);">
-                    <span class="project-title">Vintage</span></div>
-                <div class="slide" onclick="selectTemplate(3);">
-                    <span class="project-title">Elegant</span></div>
-                <div class="slide" onclick="selectTemplate(4);">
-                    <span class="project-title">Retro</span></div>
-                <div class="slide" onclick="selectTemplate(5);">
-                    <span class="project-title">Minimal</span></div>
-                <div class="slide" onclick="selectTemplate(6);">
-                    <span class="project-title">Velvet</span></div>
-                <div class="slide" onclick="selectTemplate(7);">
-                    <span class="project-title">Urban</span></div>
-                <div class="slide" onclick="selectTemplate(8);">
-                    <span class="project-title">Classic</span></div>
-                <div class="slide" onclick="selectTemplate(9);">
-                    <span class="project-title">Sci Fi</span></div>
-                <div class="slide" onclick="selectTemplate(10);">
-                    <span class="project-title">Bold</span></div>
-                <div class="slide" onclick="selectTemplate(11);">
-                    <span class="project-title">Timeless</span></div>
-                <div class="slide" onclick="selectTemplate(12);">
-                    <span class="project-title">Modern</span></div>
-                <div class="slide" onclick="selectTemplate(13);">
-                    <span class="project-title">Dramatic</span></div>
-                <div class="slide" onclick="selectTemplate(14);">
-                    <span class="project-title">Ancient</span></div>
-                <div class="slide" onclick="selectTemplate(15);">
-                    <span class="project-title">Nostalgic</span></div>
+                @foreach ($template as $key => $item)
+                    @if($key == 0)
+                        <div class="slide" onclick="selectTemplate({{ $item->id }});">
+                            <span class="project-title title-active">{{ !empty($item->template_name)?$item->template_name:'' }}</span>
+                        </div>
+                    @else
+                        <div class="slide" onclick="selectTemplate({{ $item->id }});">
+                            <span class="project-title">{{ !empty($item->template_name)?$item->template_name:'' }}</span>
+                        </div>
+                    @endif
+                @endforeach
             </div>
         </div>
 
@@ -94,9 +73,9 @@
 
                             </td>
                             <td style="border:none; background:none;">
-                                <a href="{{route('dashboard.credit')}}" class="btn btn-primary btn-xs"
-                                    style="background: #6c5ce7; border: none; border-radius: 20px; padding: 10px 22px;">
-                                    <span class="glyphicon glyphicon-chevron-right" style="font-size: 20px;"></span>
+                                <a href="{{ route('dashboard.credit', ['id' => $project->id]) }}" class="btn btn-primary btn-xs d-flex justify-content-center align-items-center"
+                                    style="background: #6c5ce7; border: none; border-radius: 20px; padding: 10px 22px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa fa-chevron-right" style="font-size: 20px; margin: 0 auto;"></i>
                                 </a>
                             </td>
                         </tr>

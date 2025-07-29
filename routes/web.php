@@ -21,7 +21,19 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
-
+Route::get('/debug-google', function () {
+    $client = new \Google_Client();
+    $client->setApplicationName('Scrollx');
+    $client->setAuthConfig(storage_path('app/google/service-account.json'));
+    $client->setScopes([
+        \Google_Service_Sheets::SPREADSHEETS,
+        \Google_Service_Drive::DRIVE,
+    ]);
+    
+    $service = new Google_Service_Sheets($client);
+    $sheets = $service->spreadsheets->get('1abcDEFghiJKLmnopQRStuvWxyz12345678901qdAOba6vkOYVq4xZy_NpZLEtJhs7V09mkU9-OagpBtE'); // Optional: use a known valid sheet ID
+    dd($sheets, 'Client ready ✅');
+});
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -35,6 +47,59 @@ Route::get('/forgot-password', [PasswordResetController::class, 'showLinkRequest
 Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/test-google-sheet', [SheetController::class, 'createSheet']);
 Route::get('/test-google-sheet/{id}', [SheetController::class, 'showSheet'])->name('sheet.show');
+Route::get('/api/sheet-data', [SheetController::class, 'getSheetData'])->name('sheet.data');
+Route::get('/api/test-direct-sheet', function() {
+    try {
+        $spreadsheetId = '1JXRl-knr6rKE0aNdhVRUODtrdvC4O5c5jSjVUmC4TzM';
+        $gid = '299738390';
+        $csvUrl = "https://docs.google.com/spreadsheets/d/{$spreadsheetId}/export?format=csv&gid={$gid}";
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $csvUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
+        
+        $data = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_error($ch);
+        curl_close($ch);
+        
+        if ($error || $httpCode !== 200) {
+            // Fallback to sample data for testing
+            $sampleData = "Instructions,,,\n";
+            $sampleData .= "Leave blank rows between blocks,,,\n";
+            $sampleData .= "block_name,role,name,\n";
+            $sampleData .= ",,,\n";
+            $sampleData .= "CAST,,,\n";
+            $sampleData .= ",Actor,John Doe,\n";
+            $sampleData .= ",Actress,Jane Smith,\n";
+            $sampleData .= ",Director,Mike Johnson,\n";
+            $sampleData .= ",,,\n";
+            $sampleData .= "CREW,,,\n";
+            $sampleData .= ",Producer,Sarah Wilson,\n";
+            $sampleData .= ",Cinematographer,Tom Brown,\n";
+            $sampleData .= ",Editor,Lisa Garcia,\n";
+            $sampleData .= ",,,\n";
+            $sampleData .= "MUSIC,,,\n";
+            $sampleData .= ",Composer,David Lee,\n";
+            $sampleData .= ",Sound Designer,Emily Chen,\n";
+            $sampleData .= ",,,\n";
+            $sampleData .= "SPECIAL THANKS,,,\n";
+            $sampleData .= ",Executive Producer,Robert Taylor,\n";
+            $sampleData .= ",Location Manager,Maria Rodriguez,\n";
+            
+            return response($sampleData)->header('Content-Type', 'text/csv');
+        }
+        
+        return response($data)->header('Content-Type', 'text/csv');
+        
+    } catch (Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+});
+// Route::post('/save-block-settings', [SheetController::class, 'saveBlockSettings'])->name('save.block.settings');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [ProjectController::class, 'create'])->name('dashboard');
@@ -65,7 +130,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('template/{id}', [TemplateController::class, 'destroy'])->name('templates.destroy');
     
     
-    Route::get('credit', [ProjectController::class, 'credit'])->name('dashboard.credit');
+    Route::get('credit/{id}', [ProjectController::class, 'credit'])->name('dashboard.credit');
+    Route::post('save-block-settings', [ProjectController::class, 'saveBlockSettings'])->name('dashboard.saveBlockSettings');
 });
 
 Route::get('/test-db', function () {

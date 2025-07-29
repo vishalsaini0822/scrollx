@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Template;
-
+use App\Services\GoogleSheetService;
 class TemplateController extends Controller
 {
     // Display a listing of the templates
@@ -29,7 +29,8 @@ class TemplateController extends Controller
         }
         $sheet = [];
         try {
-            $sheetService = app(\App\Services\GoogleSheetService::class);
+            
+            $sheetService = new GoogleSheetService();
             $sheet = $sheetService->createSheet($validated['template_name'] . ' Sheet');
             $sheetService->writeData($sheet['spreadsheetId'], 'Sheet1!A1', [
                 ['Template Name', 'Image Path'],

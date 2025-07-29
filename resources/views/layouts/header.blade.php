@@ -20,7 +20,7 @@
 
 <body>
     <header class="dashboard-header">
-        @if (request()->path() !== 'credit')
+        @if (!Str::startsWith(request()->path(), 'credit/'))
         <div class="container">
             <nav>
             <a href="{{ url('/dashboard') }}">

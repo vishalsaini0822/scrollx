@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Template;
+use App\Services\GoogleSheetService;
 class ProjectController extends Controller
 {
     /**
@@ -48,7 +49,19 @@ class ProjectController extends Controller
         $project->end_credits_type = $validated['end_credits_type'];
         $project->resolution = $validated['resolution'] ?? null;
         $project->status = 'no_status';
-        // Set the user_id to the authenticated user's ID
+
+        dd(storage_path('app/google/service-account.json'));
+        $sheetService = new GoogleSheetService();
+        $result = $sheetService->createSheet('Demo Sheet');
+        dd($result);
+        if ($result) {
+            return response()->json([
+                'message' => 'Sheet created successfully!',
+                'url' => $result['url'],
+            ]);
+        } else {
+            return response()->json(['error' => 'Failed to create sheet'], 500);
+        }
         $project->user_id = auth()->user()->id;
         $project->save();
 
@@ -174,8 +187,21 @@ class ProjectController extends Controller
         return redirect()->route('projects.index')->with('success', 'Project copied successfully.');
     }
 
-    public function credit()
+    public function credit($id)
+    {   
+        // Find the project by ID and ensure it belongs to the authenticated user
+        $project = Project::where('id', $id)    
+            ->where('user_id', Auth::id())
+            ->first();  
+        if (!$project) {
+            return redirect('dashboard')->with('toastr_error', 'Project not found.');
+        }
+        return view('dashboardinner',compact('project'));
+    }
+
+    public function saveBlockSettings(Request $request)
     {
-        return view('dashboardinner');
+        dd($request->all());
+        return response()->json(['success' => true, 'message' => 'Block settings saved successfully.']);
     }
 }

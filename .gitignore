@@ -22,3 +22,4 @@ yarn-error.log
 /.vscode
 /.zed
 /storage/app/google/service-account.json
+/storage/app/google-credentials.json

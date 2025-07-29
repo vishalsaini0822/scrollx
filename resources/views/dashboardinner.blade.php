@@ -1,74 +1,3 @@
-{{-- <style>
-    .dashboard-body {
-        background-color: #121212;
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-    }
-
-    header {
-        background-color: #1f1f1f;
-        padding: 1rem;
-        text-align: center;
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
-
-    .sidebar {
-        background-color: #2a2a2a;
-        height: 100%;
-        overflow-y: auto;
-    }
-
-    .sidebar button {
-        width: 100%;
-        text-align: left;
-        color: #fff;
-    }
-
-    .sidebar button:hover,
-    .sidebar button.active {
-        background-color: #444;
-    }
-
-    .main-content {
-        background-color: #000;
-        padding: 2rem;
-        overflow-y: auto;
-        min-height: 100%;
-        text-align: center;
-    }
-
-    .content-adjustment {
-        background-color: #1f1f1f;
-        padding: 1rem;
-        height: 100%;
-        overflow-y: auto;
-    }
-
-    .form-label,
-    .form-control,
-    .form-select,
-    button {
-        color: #fff;
-    }
-
-    .form-control,
-    .form-select {
-        background-color: #333;
-        border-color: #555;
-    }
-
-    .btn-custom {
-        background-color: #444;
-        color: #fff;
-        border: none;
-    }
-
-    .btn-custom:hover {
-        background-color: #555;
-    }
-</style> --}}
-
 @extends('layouts.app')
 
 @section('title', 'Dashboard')
@@ -80,24 +9,30 @@
             <div class="row h-100" style="height: 100%;">
                 <!-- Sidebar: Credit Block Menu -->
                 <div class="col-2 sidebar p-0 d-flex flex-column" id="sidebarHeadings"
-                    style="background-color: #181828; color: #fff; overflow-y: auto; max-height: 100vh; border-right: 1px solid #333;">
+                    style="background-color: #181828; color: #fff; border-right: 1px solid #333; min-height: 100vh; height: 100%;">
                     <div class="p-3 fw-bold" style="color: #fff; border-bottom: 1px solid #333; font-size: 1.1rem; display: flex; align-items: center; justify-content: space-between;">
                         <span>Credit Blocks</span>
                         <i class="bi bi-info-circle ms-1" style="opacity:0.7;"></i>
                     </div>
-                    <div id="sheetHeadings" class="flex-grow-1"></div>
+                    <div id="sheetHeadings" class="flex-grow-1" style="overflow-y: auto;"></div>
                 </div>
 
                 <!-- Main Content: Credit Block Content -->
-                <div class="col-7 main-content d-flex flex-column align-items-center justify-content-center"
+                <div class="col-7 main-content d-flex flex-column position-relative"
                     id="mainContent"
-                    style="background-color: #101014; color: #fff; min-height: 100vh; border-right: 1px solid #333;">
-                    <div class="w-100" id="sheetContent" style="max-width: 700px; margin: 0 auto; padding: 2rem 0;"></div>
+                    style="background-color: #101014; color: #fff; border-right: 1px solid #333; position: relative; scrollbar-width: none; flex-grow: 1 !important; min-height: 0 !important; overflow-y: auto !important; scroll-behavior: smooth;">
+                    <style>
+                        #mainContent::-webkit-scrollbar { display: none; }
+                        #mainContent { -ms-overflow-style: none; scrollbar-width: none; }
+                        .btn-custom { background-color: #007bff; border-color: #007bff; color: white; }
+                        .btn-custom:hover { background-color: #0056b3; border-color: #0056b3; }
+                    </style>
+                    <div class="w-100" id="sheetContent" style="max-width: 700px; padding-bottom: 4rem; margin: 0 auto; padding: 2rem 0;"></div>
                 </div>
 
                 <!-- Content Adjustment Tools -->
                 <div class="col-3 content-adjustment d-flex flex-column"
-                    style="background-color: #181828; color: #fff; min-height: 100vh;">
+                    style="background-color: #181828; color: #fff; min-height: 100vh; height: 100%; border-left: 1px solid #333; overflow-y: auto; padding: 2rem 1.5rem;">
                     <div class="d-flex align-items-center mb-4">
                         <div class="btn-group" role="group" style="width:100%;">
                             <button class="btn btn-sm btn-outline-light active" id="layoutTab" style="opacity:1; width:50%;">Layout</button>
@@ -166,7 +101,7 @@
                             <div class="col-6">
                                 <label class="form-label mb-1">Width</label>
                                 <div class="input-group input-group-sm">
-                                    <input type="number" class="form-control" id="width" value="65" min="1" max="100">
+                                    <input type="number" class="form-control" id="width" value="66" min="1" max="100">
                                     <span class="input-group-text">%</span>
                                 </div>
                             </div>
@@ -220,6 +155,9 @@
                         <div class="mb-2">
                             <button class="btn btn-custom w-100 btn-sm" onclick="renderAllBlocks()">Render</button>
                         </div>
+                        <div class="mb-2">
+                            <button class="btn btn-success w-100 btn-sm" id="saveBlockSettings">Save Block Settings</button>
+                        </div>
                     </div>
                     <div id="fontPanel" style="display:none;">
                         <div class="mb-2">
@@ -257,6 +195,12 @@
     <script>
         // Tab switching for Layout/Font
         document.addEventListener('DOMContentLoaded', function () {
+            // Ensure the main content height is set correctly
+            const mainContent = document.getElementById('mainContent');
+            if (mainContent) {
+                mainContent.style.height = '100vh';
+            }
+            
             document.getElementById('layoutTab').onclick = function () {
                 this.classList.add('active');
                 document.getElementById('fontTab').classList.remove('active');
@@ -271,10 +215,8 @@
             };
         });
 
-        // Google Sheet CSV export URL
-        const sheetId = '1lTzzW9nkwDVuMMAAZxNvxmGBPjaXVWSA4Giot64R8Jg';
-        const gid = '755113121';
-        const csvUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
+        // Google Sheet CSV export URL - now using Laravel route
+        const csvUrl = '/api/test-direct-sheet';
 
         let sheetData = [];
         let blockNames = [];
@@ -282,44 +224,117 @@
         let currentTemplate = 'scroll'; // 'scroll' or 'card'
         let activeBlockIdx = 0; // Track active block index for scroll mode
 
-        // Store per-block headings/subheadings
+        // Store per-block headings/subheadings and all settings
         let perBlockSettings = {};
 
-        // UI state for block tools (global settings)
-        let blockSettings = {
-            alignment: 'double',
-            gutter: 'left',
-            gutterValue: 10,
-            arrangement: '1 Column',
-            width: 40,
-            order: 'roles',
-            blockInset: 'default',
-            margin: 'Vertical',
-            marginBottom: 0,
-            fontFamily: 'Oswald',
-            fontSize: 16,
-            fontWeight: 600
-        };
+        // Default settings for a block
+        function getDefaultBlockSettings() {
+            return {
+                blockType: 'Role + Name',
+                heading: '',
+                subHeading: '',
+                alignment: 'double',
+                gutter: 'left',
+                gutterValue: 10,
+                arrangement: '1 Column',
+                width: 66, // Default width set to 66%
+                order: 'roles',
+                blockInset: 'default',
+                margin: 'Vertical',
+                marginBottom: 0,
+                fontFamily: 'Oswald',
+                fontSize: 16,
+                fontWeight: 600
+            };
+        }
+
+        // Load settings from localStorage
+        function loadBlockSettings() {
+            const saved = localStorage.getItem('perBlockSettings');
+            if (saved) {
+                perBlockSettings = JSON.parse(saved);
+            }
+        }
+
+        // Save settings to localStorage
+        function saveBlockSettings() {
+            // Send settings to server via AJAX (example using fetch)
+            fetch('/save-block-settings', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ perBlockSettings })
+            })
+            .then(response => response.json())
+            .then(data => {
+            // Optionally handle response
+            console.log('Settings saved:', data);
+            })
+            .catch(error => {
+            console.error('Error saving settings:', error);
+            });
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
+            loadBlockSettings();
             fetchSheetData();
             setupBlockTools();
         });
 
         function setupBlockTools() {
+            // Helper to get current block settings
+            function getCurrentBlockSettings() {
+                if (!perBlockSettings[activeBlockIdx]) {
+                    perBlockSettings[activeBlockIdx] = getDefaultBlockSettings();
+                }
+                return perBlockSettings[activeBlockIdx];
+            }
+
+            // Populate tools with current block settings
+            function populateTools() {
+                const settings = getCurrentBlockSettings();
+                document.getElementById('blockType').value = settings.blockType || 'Role + Name';
+                document.getElementById('heading').value = settings.heading || '';
+                document.getElementById('subHeading').value = settings.subHeading || '';
+                document.querySelectorAll('.align-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.align === settings.alignment);
+                });
+                document.getElementById('gutter').value = settings.gutterValue || 10;
+                document.querySelectorAll('.gutter-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.gutter === settings.gutter);
+                });
+                document.getElementById('arrangement').value = settings.arrangement || '1 Column';
+                document.getElementById('width').value = settings.width || 66; // Default width 66%
+                document.querySelectorAll('.order-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.order === settings.order);
+                });
+                document.querySelectorAll('.inset-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.inset === settings.blockInset);
+                });
+                document.getElementById('margin').value = settings.margin || 'Vertical';
+                document.getElementById('marginBottom').value = settings.marginBottom || 0;
+                document.getElementById('fontFamily').value = settings.fontFamily || 'Oswald';
+                document.getElementById('fontSize').value = settings.fontSize || 16;
+                document.getElementById('fontWeight').value = settings.fontWeight || 600;
+            }
+
+            // Block Type
+            document.getElementById('blockType').addEventListener('change', function () {
+                getCurrentBlockSettings().blockType = this.value;
+                renderAllBlocks();
+            });
             // Heading
             document.getElementById('heading').addEventListener('input', function () {
-                perBlockSettings[activeBlockIdx] = perBlockSettings[activeBlockIdx] || {};
-                perBlockSettings[activeBlockIdx].heading = this.value;
+                getCurrentBlockSettings().heading = this.value;
                 renderAllBlocks(() => {
-                    // Scroll to the block after heading is added
                     scrollToBlock(activeBlockIdx, true);
                 });
             });
             // Sub-Heading
             document.getElementById('subHeading').addEventListener('input', function () {
-                perBlockSettings[activeBlockIdx] = perBlockSettings[activeBlockIdx] || {};
-                perBlockSettings[activeBlockIdx].subHeading = this.value;
+                getCurrentBlockSettings().subHeading = this.value;
                 renderAllBlocks(() => {
                     scrollToBlock(activeBlockIdx, true);
                 });
@@ -329,43 +344,39 @@
                 btn.addEventListener('click', function () {
                     document.querySelectorAll('.align-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-                    blockSettings.alignment = this.dataset.align;
+                    getCurrentBlockSettings().alignment = this.dataset.align;
                     renderAllBlocks();
                 });
             });
             // Gutter
             document.getElementById('gutter').addEventListener('input', function () {
-                blockSettings.gutterValue = parseInt(this.value) || 0;
+                getCurrentBlockSettings().gutterValue = parseInt(this.value) || 0;
                 renderAllBlocks();
             });
             document.querySelectorAll('.gutter-btn').forEach(btn => {
                 btn.addEventListener('click', function () {
                     document.querySelectorAll('.gutter-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-                    blockSettings.gutter = this.dataset.gutter;
+                    getCurrentBlockSettings().gutter = this.dataset.gutter;
                     renderAllBlocks();
                 });
             });
             // Arrangement
             document.getElementById('arrangement').addEventListener('change', function () {
-                blockSettings.arrangement = this.value;
+                getCurrentBlockSettings().arrangement = this.value;
                 renderAllBlocks();
             });
-            // Width
             // Width
             document.getElementById('width').addEventListener('input', function () {
-                blockSettings.width = parseInt(this.value) || 65;
+                getCurrentBlockSettings().width = parseInt(this.value) || 66;
                 renderAllBlocks();
             });
-            // Set initial value and trigger render on load
-            blockSettings.width = parseInt(document.getElementById('width').value) || 65;
-            renderAllBlocks();
             // Order
             document.querySelectorAll('.order-btn').forEach(btn => {
                 btn.addEventListener('click', function () {
                     document.querySelectorAll('.order-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-                    blockSettings.order = this.dataset.order;
+                    getCurrentBlockSettings().order = this.dataset.order;
                     renderAllBlocks();
                 });
             });
@@ -374,52 +385,71 @@
                 btn.addEventListener('click', function () {
                     document.querySelectorAll('.inset-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-                    blockSettings.blockInset = this.dataset.inset;
+                    getCurrentBlockSettings().blockInset = this.dataset.inset;
                     renderAllBlocks();
                 });
             });
             // Margin
             document.getElementById('margin').addEventListener('change', function () {
-                blockSettings.margin = this.value;
+                getCurrentBlockSettings().margin = this.value;
                 renderAllBlocks();
             });
             // Margin Bottom
             document.getElementById('marginBottom').addEventListener('input', function () {
-                blockSettings.marginBottom = parseInt(this.value) || 0;
+                getCurrentBlockSettings().marginBottom = parseInt(this.value) || 0;
                 renderAllBlocks();
             });
             // Font controls
             document.getElementById('fontFamily').addEventListener('change', function () {
-                blockSettings.fontFamily = this.value;
+                getCurrentBlockSettings().fontFamily = this.value;
                 renderAllBlocks();
             });
             document.getElementById('fontSize').addEventListener('input', function () {
-                blockSettings.fontSize = parseInt(this.value) || 16;
+                getCurrentBlockSettings().fontSize = parseInt(this.value) || 16;
                 renderAllBlocks();
             });
             document.getElementById('fontWeight').addEventListener('change', function () {
-                blockSettings.fontWeight = parseInt(this.value) || 600;
+                getCurrentBlockSettings().fontWeight = parseInt(this.value) || 600;
                 renderAllBlocks();
             });
+
+            // Save button
+            document.getElementById('saveBlockSettings').addEventListener('click', function () {
+                saveBlockSettings();
+            });
+
+            // When switching block, populate tools
+            window.populateTools = populateTools;
         }
 
         // Fetch and parse CSV
         function fetchSheetData() {
+            console.log('Fetching data from:', csvUrl);
             fetch(csvUrl)
-                .then(response => response.text())
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
                 .then(csv => {
+                    console.log('CSV data received, length:', csv.length);
                     sheetData = parseCSV(csv);
+                    console.log('Parsed sheet data:', sheetData.length, 'rows');
                     // Remove the heading/instruction rows (rows 0, 1, 2, 3)
                     if (sheetData.length > 4) {
                         sheetData = sheetData.slice(4);
                     } else {
                         sheetData = [];
                     }
+                    console.log('After removing headers:', sheetData.length, 'rows');
                     renderHeadings();
                     renderAllBlocks();
                 })
                 .catch(err => {
-                    document.getElementById('sheetHeadings').innerHTML = '<div style="color:#aaa; padding:1rem;">Failed to load data</div>';
+                    console.error('Error fetching sheet data:', err);
+                    document.getElementById('sheetHeadings').innerHTML = '<div style="color:#aaa; padding:1rem;">Failed to load data<br>Error: ' + err.message + '</div>';
                 });
         }
 
@@ -502,6 +532,7 @@
                 btn.onmouseout = () => btn.style.background = 'none';
                 btn.onclick = () => {
                     activeBlockIdx = idx;
+                    window.populateTools();
                     renderAllBlocks(() => {
                         scrollToBlock(idx, true);
                     });
@@ -533,14 +564,16 @@
             // Auto-select first block if available
             if (blockNames.length > 0) {
                 document.getElementById('block-tab-0').classList.add('active');
+                window.populateTools();
             }
         }
 
         // Render all blocks for scrolling template
         function renderAllBlocks(callback) {
             const contentDiv = document.getElementById('sheetContent');
+            // Remove overflow-y:auto and max-height to disable vertical/horizontal scrollbars
             contentDiv.innerHTML = `
-                <div id="all-blocks-container" style="width:100%; max-height:600px; overflow-y:auto; background:#101014; border-radius:14px; box-shadow:0 0 0 1px #222; padding:2.5rem 0;">
+                <div id="all-blocks-container" style="width:100%; background:#101014; border-radius:14px; box-shadow:0 0 0 1px #222; padding:2.5rem 0;">
                 </div>
             `;
             const container = document.getElementById('all-blocks-container');
@@ -560,10 +593,12 @@
                 }
                 let leftCol = [];
                 let rightCol = [];
+                // Use per-block settings
+                const settings = perBlockSettings[idx] || getDefaultBlockSettings();
                 blockRows.forEach(row => {
                     const role = row[1] ? row[1].trim() : '';
                     const name = row[2] ? row[2].trim() : '';
-                    if (blockSettings.order === 'roles') {
+                    if (settings.order === 'roles') {
                         if (role || name) {
                             leftCol.push(role);
                             rightCol.push(name);
@@ -582,13 +617,13 @@
                 blockSection.id = 'credit-block-' + idx;
                 blockSection.style.padding = '2rem 0 1.5rem 0';
                 blockSection.style.borderBottom = '2px solid #222';
-                blockSection.style.width = blockSettings.width + '%';
-                blockSection.style.margin = blockSettings.margin === 'Vertical' ? '0 auto' : 'auto 0';
-                blockSection.style.marginBottom = blockSettings.marginBottom + 'px';
+                blockSection.style.width = (settings.width || 66) + '%'; // Default width 66%
+                blockSection.style.margin = settings.margin === 'Vertical' ? '0 auto' : 'auto 0';
+                blockSection.style.marginBottom = settings.marginBottom + 'px';
 
                 // Per-block heading/subheading
-                const heading = (perBlockSettings[idx] && perBlockSettings[idx].heading) || '';
-                const subHeading = (perBlockSettings[idx] && perBlockSettings[idx].subHeading) || '';
+                const heading = settings.heading || '';
+                const subHeading = settings.subHeading || '';
                 if (heading) {
                     const headingDiv = document.createElement('div');
                     headingDiv.style.fontSize = '2rem';
@@ -621,26 +656,26 @@
                 table.style.width = '90%';
                 table.style.margin = '0 auto';
                 table.style.borderCollapse = 'separate';
-                table.style.borderSpacing = `0 ${blockSettings.gutterValue}px`;
+                table.style.borderSpacing = `0 ${settings.gutterValue}px`;
                 const tbody = document.createElement('tbody');
                 for (let i = 0; i < maxRows; i++) {
                     const tr = document.createElement('tr');
                     const tdRole = document.createElement('td');
                     tdRole.style.textAlign = 'left';
                     tdRole.style.padding = '0 2em 0 0';
-                    tdRole.style.fontFamily = blockSettings.fontFamily;
+                    tdRole.style.fontFamily = settings.fontFamily;
                     tdRole.style.letterSpacing = '0.18em';
-                    tdRole.style.fontSize = blockSettings.fontSize + 'px';
-                    tdRole.style.fontWeight = blockSettings.fontWeight;
+                    tdRole.style.fontSize = settings.fontSize + 'px';
+                    tdRole.style.fontWeight = settings.fontWeight;
                     tdRole.style.verticalAlign = 'top';
                     tdRole.style.whiteSpace = 'pre';
                     tdRole.style.color = '#fff';
                     tdRole.textContent = leftCol[i] ? leftCol[i] : '';
                     const tdName = document.createElement('td');
                     tdName.style.textAlign = 'right';
-                    tdName.style.fontFamily = blockSettings.fontFamily;
-                    tdName.style.fontSize = blockSettings.fontSize + 'px';
-                    tdName.style.fontWeight = blockSettings.fontWeight;
+                    tdName.style.fontFamily = settings.fontFamily;
+                    tdName.style.fontSize = settings.fontSize + 'px';
+                    tdName.style.fontWeight = settings.fontWeight;
                     tdName.style.verticalAlign = 'top';
                     tdName.style.whiteSpace = 'pre';
                     tdName.textContent = rightCol[i] ? rightCol[i] : '';
@@ -713,18 +748,34 @@
         }
 
         function scrollToBlock(idx, smooth = false) {
+            // Update active block index
+            activeBlockIdx = idx;
+            
+            // Update sidebar active state
             document.querySelectorAll('#sheetHeadings button').forEach(btn => btn.classList.remove('active'));
             const btn = document.getElementById('block-tab-' + idx);
             if (btn) btn.classList.add('active');
-            const container = document.getElementById('all-blocks-container');
+            
+            // Get the main content container and target block
+            const mainContent = document.getElementById('mainContent');
             const block = document.getElementById('credit-block-' + idx);
-            if (container && block) {
-                container.scrollTo({
-                    top: block.offsetTop - container.offsetTop,
+            
+            if (mainContent && block) {
+                // Calculate scroll position relative to the main content container
+                const containerRect = mainContent.getBoundingClientRect();
+                const blockRect = block.getBoundingClientRect();
+                const scrollTop = mainContent.scrollTop;
+                const targetScrollTop = scrollTop + (blockRect.top - containerRect.top) - 50; // 50px offset from top
+                
+                mainContent.scrollTo({
+                    top: targetScrollTop,
                     behavior: smooth ? 'smooth' : 'auto'
                 });
             }
         }
+
+
+
     </script>
 
 @endsection

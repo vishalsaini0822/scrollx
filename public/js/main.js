@@ -192,7 +192,7 @@ $(document).ready(function() {
                 <div class="modal-dialog" role="document">
                     <div class="modal-content" style="background:#23232b; color:#fff; border-radius:12px; text-align:center;">
                         <div class="modal-header" style="border-bottom:none;">
-                            <button type="button" class="close" data-dismiss="modal" style="color:#fff; opacity:1;">&times;</button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1); opacity:1;"></button>
                         </div>
                         <div class="modal-body" style="padding:32px 24px;">
                             <div style="display:flex; flex-direction:column; align-items:center;">
@@ -204,7 +204,7 @@ $(document).ready(function() {
                                 <input type="text" id="duplicateProjectName" class="form-control" placeholder="Name" value="" style="background:#18181f; color:#fff; border:1px solid #444; border-radius:8px; margin-bottom:4px; width:100%; max-width:400px; text-align:left; transition: border 0.2s;" />
                                 <span id="duplicateNameError" style="color:#ff7675; display:none; margin-bottom:20px; margin-top:2px; text-align:left; width:100%; font-size:14px;"></span></div>
                                 <div style="display:flex; justify-content:center; gap:24px;">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal" style="background:none; color:#fff; border:1px solid #444; border-radius:8px; padding:8px 32px;">Cancel</button>
+                                    <button type="button" class="btn btn-default" data-bs-dismiss="modal" style="background:none; color:#fff; border:1px solid #444; border-radius:8px; padding:8px 32px;">Cancel</button>
                                     <button type="button" class="btn btn-primary" id="confirmDuplicateBtn" style="background:#6c5ce7; border:none; border-radius:8px; padding:8px 32px;">Confirm</button>
                                 </div>
                             </div>
