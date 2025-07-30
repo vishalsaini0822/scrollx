@@ -46,4 +46,12 @@ class User extends Authenticatable
             'deleted_at' => 'datetime',
         ];
     }
+
+    /**
+     * Get the user's block settings.
+     */
+    public function blockSettings()
+    {
+        return $this->hasMany(UserBlockSettings::class);
+    }
 }

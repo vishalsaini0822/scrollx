@@ -184,28 +184,31 @@
                         </div>
                         <div class="row g-2 mb-2">
                             <div class="col-6">
-                                <label class="form-label mb-1">Margin</label>
-                                <select class="form-select form-select-sm" id="margin">
-                                    <option>Vertical</option>
-                                    <option>Horizontal</option>
+                                <label class="form-label mb-1" style="font-weight: 500; color: #e2e8f0;">Margin</label>
+                                <select class="form-select form-select-sm modern-card" id="margin" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 8px;">
+                                    <option style="background: #2d3748; color: #fff;">Vertical</option>
+                                    <option style="background: #2d3748; color: #fff;">Horizontal</option>
                                 </select>
                             </div>
                             <div class="col-6">
-                                <label class="form-label mb-1">Bottom</label>
+                                <label class="form-label mb-1" style="font-weight: 500; color: #e2e8f0;">Bottom</label>
                                 <div class="input-group input-group-sm">
-                                    <input type="number" class="form-control" id="marginBottom" value="0">
-                                    <span class="input-group-text">px</span>
+                                    <input type="number" class="form-control modern-card" id="marginBottom" value="0" min="0" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 8px 0 0 8px;">
+                                    <span class="input-group-text modern-card" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #a0aec0; border-radius: 0 8px 8px 0;">px</span>
                                 </div>
                             </div>
                         </div>
                         <div class="mb-2">
-                            <button class="btn btn-custom w-100 btn-sm" onclick="renderAllBlocks()" style="border-radius: 8px; font-weight: 500;">Render</button>
+                            <a href="{{ route('project.render', ['projectId' => $project->id]) }}" class="btn btn-custom w-100 btn-sm" style="border-radius: 8px; font-weight: 500; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                <i class="bi bi-play-circle"></i>
+                                Render
+                            </a>
                         </div>
                         <div class="mb-2">
-                            <button class="btn btn-success w-100 btn-sm" id="saveBlockSettings" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%); border: none; border-radius: 8px; font-weight: 500;">Save Block Settings</button>
+                            <button class="btn btn-warning w-100 btn-sm" id="creaditSheet" style="background: linear-gradient(135deg, #d69e2e 0%, #b7791f 100%); border: none; border-radius: 8px; font-weight: 500; color: white;">Credits Sheet</button>
                         </div>
                         <div class="mb-2">
-                            <button class="btn w-100 btn-sm" style="background: linear-gradient(135deg, #805ad5 0%, #6b46c1 100%); border: none; border-radius: 8px; font-weight: 500; color: white; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <button class="btn w-100 btn-sm" id="syncCredits" style="background: linear-gradient(135deg, #805ad5 0%, #6b46c1 100%); border: none; border-radius: 8px; font-weight: 500; color: white; display: flex; align-items: center; justify-content: center; gap: 8px;">
                                 <i class="bi bi-arrow-repeat"></i>
                                 Sync Credits
                             </button>
@@ -298,6 +301,17 @@
                                     </select>
                                 </div>
                                 <div class="col-6">
+                                    <select class="form-select form-select-sm modern-card" id="subHeadingFontWeight" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 8px;">
+                                        <option value="300" style="background: #2d3748; color: #fff;">Light</option>
+                                        <option value="400" style="background: #2d3748; color: #fff;">Regular</option>
+                                        <option value="500" style="background: #2d3748; color: #fff;">Medium</option>
+                                        <option value="600" style="background: #2d3748; color: #fff;">Semibold</option>
+                                        <option value="700" style="background: #2d3748; color: #fff;">Bold</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row g-2 mb-2">
+                                <div class="col-4">
                                     <div class="input-group input-group-sm">
                                         <button class="btn btn-outline-light" type="button" id="subHeadingFontSizeDown" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
                                             <i class="bi bi-chevron-down"></i>
@@ -306,7 +320,40 @@
                                         <button class="btn btn-outline-light" type="button" id="subHeadingFontSizeUp" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
                                             <i class="bi bi-chevron-up"></i>
                                         </button>
-                                        <span class="input-group-text" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff;">PX</span>
+                                        <span class="input-group-text" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff;">px</span>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-text" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff;">A|A</span>
+                                        <input type="number" class="form-control text-center modern-card" id="subHeadingLetterSpacing" value="0" step="0.1" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff;">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-text" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff;">↓</span>
+                                        <input type="number" class="form-control text-center modern-card" id="subHeadingLineHeight" value="1.2" step="0.1" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-2 mb-2">
+                                <div class="col-6">
+                                    <div class="btn-group w-100" role="group">
+                                        <button type="button" class="btn btn-outline-light btn-sm subheading-style-btn" data-style="bold" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                                            <strong>B</strong>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-light btn-sm subheading-style-btn" data-style="italic" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                                            <em>I</em>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-light btn-sm subheading-style-btn" data-style="underline" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                                            <u>U</u>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-text" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff;">#</span>
+                                        <input type="color" class="form-control form-control-color modern-card" id="subHeadingColor" value="#ffffff" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 2px; border-radius: 0 8px 8px 0;">
                                     </div>
                                 </div>
                             </div>
@@ -380,6 +427,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        // Project information from server
+        const PROJECT_ID = {{ $project->id }};
+        const PROJECT_NAME = "{{ $project->template_name }}";
+        
+        console.log('Current Project:', { id: PROJECT_ID, name: PROJECT_NAME });
+
         // Tab switching for Layout/Font
         document.addEventListener('DOMContentLoaded', function () {
             // Ensure the main content height is set correctly
@@ -428,9 +481,12 @@
 
         // Helper to get current block settings (moved to global scope)
         function getCurrentBlockSettings() {
+            console.log('Getting settings for block:', activeBlockIdx);
             if (!perBlockSettings[activeBlockIdx]) {
+                console.log('Creating new settings for block:', activeBlockIdx);
                 perBlockSettings[activeBlockIdx] = getDefaultBlockSettings();
             }
+            console.log('Current block settings:', perBlockSettings[activeBlockIdx]);
             return perBlockSettings[activeBlockIdx];
         }
 
@@ -457,13 +513,16 @@
                 headingLetterSpacing: 0,
                 headingLineHeight: 1.2,
                 headingColor: '#ffffff',
-                headingBold: false,
-                headingItalic: false,
-                headingUnderline: false,
+                headingStyles: [], // Array for bold, italic, underline
                 
                 // Sub Heading Typography
                 subHeadingFontFamily: 'Oswald',
                 subHeadingFontSize: 12,
+                subHeadingFontWeight: 400,
+                subHeadingLetterSpacing: 0,
+                subHeadingLineHeight: 1.2,
+                subHeadingColor: '#ffffff',
+                subHeadingStyles: [], // Array for bold, italic, underline
                 
                 // Role Typography
                 roleFontFamily: 'Noto Sans',
@@ -480,53 +539,63 @@
             };
         }
 
-        // Load settings from localStorage
-        function loadBlockSettings() {
-            const saved = localStorage.getItem('perBlockSettings');
-            if (saved) {
-                perBlockSettings = JSON.parse(saved);
+        // Load settings from database with localStorage fallback
+        async function loadBlockSettings() {
+            try {
+                console.log('Loading block settings from database for project:', PROJECT_ID, PROJECT_NAME);
+                
+                const response = await fetch(`/api/block-settings/load?projectId=${PROJECT_ID}&projectName=${encodeURIComponent(PROJECT_NAME)}`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                });
+
+                const result = await response.json();
+                
+                if (result.success && result.data.hasSettings) {
+                    perBlockSettings = result.data.perBlockSettings || {};
+                    console.log('Block settings loaded successfully from database');
+                    
+                    // Also update localStorage as backup
+                    localStorage.setItem('blockSettings', JSON.stringify(perBlockSettings));
+                    return true;
+                } else {
+                    console.log('No saved settings found in database, checking localStorage...');
+                    // Fallback to localStorage
+                    return loadBlockSettingsFromLocalStorage();
+                }
+            } catch (error) {
+                console.error('Error loading block settings from database:', error);
+                // Fallback to localStorage
+                return loadBlockSettingsFromLocalStorage();
             }
         }
-
-        // Save settings to localStorage
-        function saveBlockSettings() {
-            // Send settings to server via AJAX (example using fetch)
-            fetch('/save-block-settings', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({ perBlockSettings })
-            })
-            .then(response => response.json())
-            .then(data => {
-            // Optionally handle response
-            console.log('Settings saved:', data);
-            })
-            .catch(error => {
-            console.error('Error saving settings:', error);
-            });
-        }
-
-        // Load settings from localStorage
-        function loadBlockSettings() {
+        
+        // Fallback function to load from localStorage
+        function loadBlockSettingsFromLocalStorage() {
             const saved = localStorage.getItem('blockSettings');
             if (saved) {
                 try {
                     perBlockSettings = JSON.parse(saved);
+                    console.log('Block settings loaded from localStorage fallback');
+                    return true;
                 } catch (e) {
-                    console.warn('Error loading saved settings:', e);
+                    console.warn('Error loading saved settings from localStorage:', e);
                     perBlockSettings = {};
+                    return false;
                 }
             }
+            perBlockSettings = {};
+            return false;
         }
 
         // Enhanced data loading with error handling
         function loadSheetDataSafely() {
-            console.log('Loading sheet data...');
+            console.log('Loading sheet data for project:', PROJECT_ID);
             
-            // Google Sheet CSV export URL - now using Laravel route
+            // Temporarily use the old endpoint to test
             const csvUrl = '/api/test-direct-sheet';
             
             // Fetch and parse CSV
@@ -541,9 +610,11 @@
                     })
                     .then(csv => {
                         console.log('CSV data received, length:', csv.length);
+                        console.log('First 200 chars of CSV:', csv.substring(0, 200));
                         try {
                             const parsedData = parseCSV(csv);
                             console.log('Parsed CSV rows:', parsedData.length);
+                            console.log('First few rows:', parsedData.slice(0, 5));
                             
                             if (parsedData.length === 0) {
                                 throw new Error('No data found in CSV');
@@ -591,30 +662,222 @@
         }
 
         // Enhanced initialization with better error handling
-        function initializeApp() {
+        async function initializeApp() {
             try {
-                loadBlockSettings();
+                console.log('Starting app initialization...');
+                console.log('Project ID:', PROJECT_ID);
+                console.log('Project Name:', PROJECT_NAME);
+                
+                // Load block settings from database first
+                await loadBlockSettings();
+                
+                console.log('Loading sheet data...');
                 loadSheetDataSafely()
                     .then(() => {
+                        console.log('Sheet data loaded successfully:', sheetData.length, 'rows');
+                        console.log('Sample data:', sheetData.slice(0, 3));
+                        
                         renderHeadings();
+                        console.log('Block names found:', blockNames);
+                        
                         if (blockNames.length > 0) {
                             activeBlockIdx = 0;
                             updateUIFromSettings();
                             renderAllBlocks();
+                            console.log('App initialized successfully');
                         } else {
                             console.warn('No valid block names found');
                             document.getElementById('sheetContent').innerHTML = 
-                                '<div style="color: #aaa; text-align: center; padding: 2rem;">No credit blocks found. Please check your sheet data.</div>';
+                                '<div style="color: #ff6b6b; text-align: center; padding: 2rem;">No credit blocks found. Try clicking "Sync Credits" to refresh data.</div>';
                         }
                     })
                     .catch(error => {
                         console.error('Failed to initialize app:', error);
                         document.getElementById('sheetContent').innerHTML = 
-                            '<div style="color: #ff6b6b; text-align: center; padding: 2rem;">Error loading data. Please try refreshing the page.</div>';
+                            '<div style="color: #ff6b6b; text-align: center; padding: 2rem;">Error loading data. Please try refreshing the page.<br><small>' + error.message + '</small></div>';
                     });
             } catch (error) {
                 console.error('Critical error during app initialization:', error);
             }
+        }
+
+        // Google Sheets Integration Functions
+        async function openGoogleSheetForEditing() {
+            try {
+                console.log('Opening Google Sheet for editing...');
+                
+                // Show loading state
+                const button = document.getElementById('creaditSheet');
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="bi bi-hourglass-split"></i> Opening...';
+                button.disabled = true;
+                
+                // Get or create Google Sheet URL for this project
+                const response = await fetch(`/api/project-google-sheet/${PROJECT_ID}`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                });
+                
+                const result = await response.json();
+                
+                if (result.success && result.sheetUrl) {
+                    // Open the Google Sheet in a new tab
+                    window.open(result.sheetUrl, '_blank');
+                    
+                    // Show success message
+                    showNotification('Google Sheet opened successfully!', 'success');
+                } else {
+                    // If no sheet exists, create a new one
+                    await createNewGoogleSheet();
+                }
+                
+            } catch (error) {
+                console.error('Error opening Google Sheet:', error);
+                showNotification('Failed to open Google Sheet. Please try again.', 'error');
+            } finally {
+                // Restore button state
+                const button = document.getElementById('creaditSheet');
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }
+        }
+        
+        async function createNewGoogleSheet() {
+            try {
+                console.log('Creating new Google Sheet for project...');
+                
+                const response = await fetch('/api/create-project-sheet', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        projectId: PROJECT_ID,
+                        projectName: PROJECT_NAME
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success && result.sheetUrl) {
+                    // Open the newly created Google Sheet
+                    window.open(result.sheetUrl, '_blank');
+                    showNotification('New Google Sheet created and opened!', 'success');
+                } else {
+                    throw new Error(result.message || 'Failed to create Google Sheet');
+                }
+                
+            } catch (error) {
+                console.error('Error creating Google Sheet:', error);
+                showNotification('Failed to create Google Sheet. Please contact support.', 'error');
+            }
+        }
+        
+        async function syncCreditsFromGoogleSheet() {
+            try {
+                console.log('Syncing credits from Google Sheet...');
+                
+                // Show loading state
+                const button = document.getElementById('syncCredits');
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="bi bi-arrow-repeat spin"></i> Syncing...';
+                button.disabled = true;
+                
+                // Add spin animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    .spin {
+                        animation: spin 1s linear infinite;
+                    }
+                    @keyframes spin {
+                        from { transform: rotate(0deg); }
+                        to { transform: rotate(360deg); }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Force refresh the sheet data
+                const freshData = await loadSheetDataSafely();
+                
+                if (freshData && freshData.length > 0) {
+                    // Update the UI with fresh data
+                    sheetData = freshData;
+                    renderHeadings();
+                    
+                    // If we have an active block, re-render it
+                    if (blockNames.length > 0) {
+                        renderAllBlocks();
+                    }
+                    
+                    showNotification('Credits synchronized successfully!', 'success');
+                } else {
+                    showNotification('No data found to sync. Please check your Google Sheet.', 'warning');
+                }
+                
+            } catch (error) {
+                console.error('Error syncing credits:', error);
+                showNotification('Failed to sync credits. Please try again.', 'error');
+            } finally {
+                // Restore button state
+                const button = document.getElementById('syncCredits');
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }
+        }
+        
+        // Utility function to show notifications
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type === 'success' ? 'success' : type === 'error' ? 'danger' : type === 'warning' ? 'warning' : 'info'}`;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 9999;
+                max-width: 400px;
+                padding: 12px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i class="bi bi-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-triangle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            // Add slide-in animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(notification);
+            
+            // Auto-remove after 4 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 4000);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -653,6 +916,7 @@
                 document.getElementById('blockType').addEventListener('change', function () {
                     getCurrentBlockSettings().blockType = this.value;
                     renderAllBlocks();
+                    autoSaveSettings(); // Auto-save on change
                 });
             }
 
@@ -661,6 +925,7 @@
                 document.getElementById('heading').addEventListener('input', function () {
                     getCurrentBlockSettings().heading = this.value;
                     renderAllBlocks();
+                    autoSaveSettings(); // Auto-save on input
                 });
             }
 
@@ -669,6 +934,7 @@
                 document.getElementById('subHeading').addEventListener('input', function () {
                     getCurrentBlockSettings().subHeading = this.value;
                     renderAllBlocks();
+                    autoSaveSettings(); // Auto-save on input
                 });
             }
 
@@ -685,6 +951,7 @@
                     this.style.borderColor = '#667eea';
                     getCurrentBlockSettings().alignment = this.dataset.align;
                     renderAllBlocks();
+                    autoSaveSettings(); // Auto-save on button click
                 });
             });
 
@@ -730,8 +997,14 @@
             // Order buttons
             document.querySelectorAll('.order-btn').forEach(btn => {
                 btn.addEventListener('click', function () {
-                    document.querySelectorAll('.order-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.order-btn').forEach(b => {
+                        b.classList.remove('active');
+                        b.style.background = 'rgba(255,255,255,0.1)';
+                        b.style.borderColor = 'rgba(255,255,255,0.2)';
+                    });
                     this.classList.add('active');
+                    this.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                    this.style.borderColor = '#667eea';
                     getCurrentBlockSettings().order = this.dataset.order;
                     renderAllBlocks();
                 });
@@ -788,8 +1061,274 @@
                 });
             }
 
+            // Heading Font Controls
+            if (document.getElementById('headingFontFamily')) {
+                document.getElementById('headingFontFamily').addEventListener('change', function () {
+                    console.log('Heading font family changed to:', this.value);
+                    getCurrentBlockSettings().headingFontFamily = this.value;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('headingFontWeight')) {
+                document.getElementById('headingFontWeight').addEventListener('change', function () {
+                    console.log('Heading font weight changed to:', this.value);
+                    getCurrentBlockSettings().headingFontWeight = parseInt(this.value) || 600;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('headingFontSize')) {
+                document.getElementById('headingFontSize').addEventListener('input', function () {
+                    console.log('Heading font size changed to:', this.value);
+                    getCurrentBlockSettings().headingFontSize = parseInt(this.value) || 24;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('headingFontSizeUp')) {
+                document.getElementById('headingFontSizeUp').addEventListener('click', function () {
+                    const input = document.getElementById('headingFontSize');
+                    const newValue = Math.min(parseInt(input.value) + 1, parseInt(input.max));
+                    input.value = newValue;
+                    getCurrentBlockSettings().headingFontSize = newValue;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('headingFontSizeDown')) {
+                document.getElementById('headingFontSizeDown').addEventListener('click', function () {
+                    const input = document.getElementById('headingFontSize');
+                    const newValue = Math.max(parseInt(input.value) - 1, parseInt(input.min));
+                    input.value = newValue;
+                    getCurrentBlockSettings().headingFontSize = newValue;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('headingLetterSpacing')) {
+                document.getElementById('headingLetterSpacing').addEventListener('input', function () {
+                    getCurrentBlockSettings().headingLetterSpacing = parseFloat(this.value) || 0;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('headingLineHeight')) {
+                document.getElementById('headingLineHeight').addEventListener('input', function () {
+                    getCurrentBlockSettings().headingLineHeight = parseFloat(this.value) || 1.2;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('headingColor')) {
+                document.getElementById('headingColor').addEventListener('input', function () {
+                    getCurrentBlockSettings().headingColor = this.value;
+                    renderAllBlocks();
+                });
+            }
+
+            // Heading Style Buttons
+            document.querySelectorAll('.heading-style-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const style = this.dataset.style;
+                    const settings = getCurrentBlockSettings();
+                    
+                    if (!settings.headingStyles) settings.headingStyles = [];
+                    
+                    if (settings.headingStyles.includes(style)) {
+                        settings.headingStyles = settings.headingStyles.filter(s => s !== style);
+                        this.style.background = 'rgba(255,255,255,0.1)';
+                        this.style.borderColor = 'rgba(255,255,255,0.2)';
+                    } else {
+                        settings.headingStyles.push(style);
+                        this.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                        this.style.borderColor = '#667eea';
+                    }
+                    
+                    renderAllBlocks();
+                });
+            });
+
+            // Sub Heading Font Controls
+            if (document.getElementById('subHeadingFontFamily')) {
+                document.getElementById('subHeadingFontFamily').addEventListener('change', function () {
+                    console.log('Sub heading font family changed to:', this.value);
+                    getCurrentBlockSettings().subHeadingFontFamily = this.value;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('subHeadingFontWeight')) {
+                document.getElementById('subHeadingFontWeight').addEventListener('change', function () {
+                    console.log('Sub heading font weight changed to:', this.value);
+                    getCurrentBlockSettings().subHeadingFontWeight = parseInt(this.value) || 400;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('subHeadingFontSize')) {
+                document.getElementById('subHeadingFontSize').addEventListener('input', function () {
+                    console.log('Sub heading font size changed to:', this.value);
+                    getCurrentBlockSettings().subHeadingFontSize = parseInt(this.value) || 12;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('subHeadingFontSizeUp')) {
+                document.getElementById('subHeadingFontSizeUp').addEventListener('click', function () {
+                    const input = document.getElementById('subHeadingFontSize');
+                    const newValue = Math.min(parseInt(input.value) + 1, parseInt(input.max));
+                    input.value = newValue;
+                    getCurrentBlockSettings().subHeadingFontSize = newValue;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('subHeadingFontSizeDown')) {
+                document.getElementById('subHeadingFontSizeDown').addEventListener('click', function () {
+                    const input = document.getElementById('subHeadingFontSize');
+                    const newValue = Math.max(parseInt(input.value) - 1, parseInt(input.min));
+                    input.value = newValue;
+                    getCurrentBlockSettings().subHeadingFontSize = newValue;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('subHeadingLetterSpacing')) {
+                document.getElementById('subHeadingLetterSpacing').addEventListener('input', function () {
+                    getCurrentBlockSettings().subHeadingLetterSpacing = parseFloat(this.value) || 0;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('subHeadingLineHeight')) {
+                document.getElementById('subHeadingLineHeight').addEventListener('input', function () {
+                    getCurrentBlockSettings().subHeadingLineHeight = parseFloat(this.value) || 1.2;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('subHeadingColor')) {
+                document.getElementById('subHeadingColor').addEventListener('input', function () {
+                    getCurrentBlockSettings().subHeadingColor = this.value;
+                    renderAllBlocks();
+                });
+            }
+
+            // Sub Heading Style Buttons
+            document.querySelectorAll('.subheading-style-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const style = this.dataset.style;
+                    const settings = getCurrentBlockSettings();
+                    
+                    if (!settings.subHeadingStyles) settings.subHeadingStyles = [];
+                    
+                    if (settings.subHeadingStyles.includes(style)) {
+                        settings.subHeadingStyles = settings.subHeadingStyles.filter(s => s !== style);
+                        this.style.background = 'rgba(255,255,255,0.1)';
+                        this.style.borderColor = 'rgba(255,255,255,0.2)';
+                    } else {
+                        settings.subHeadingStyles.push(style);
+                        this.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                        this.style.borderColor = '#667eea';
+                    }
+                    
+                    renderAllBlocks();
+                });
+            });
+
+            // Role Font Controls
+            if (document.getElementById('roleFontFamily')) {
+                document.getElementById('roleFontFamily').addEventListener('change', function () {
+                    getCurrentBlockSettings().roleFontFamily = this.value;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('roleFontSize')) {
+                document.getElementById('roleFontSize').addEventListener('input', function () {
+                    getCurrentBlockSettings().roleFontSize = parseInt(this.value) || 8;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('roleFontSizeUp')) {
+                document.getElementById('roleFontSizeUp').addEventListener('click', function () {
+                    const input = document.getElementById('roleFontSize');
+                    const newValue = Math.min(parseInt(input.value) + 1, parseInt(input.max));
+                    input.value = newValue;
+                    getCurrentBlockSettings().roleFontSize = newValue;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('roleFontSizeDown')) {
+                document.getElementById('roleFontSizeDown').addEventListener('click', function () {
+                    const input = document.getElementById('roleFontSize');
+                    const newValue = Math.max(parseInt(input.value) - 1, parseInt(input.min));
+                    input.value = newValue;
+                    getCurrentBlockSettings().roleFontSize = newValue;
+                    renderAllBlocks();
+                });
+            }
+
+            // Name Font Controls
+            if (document.getElementById('nameFontFamily')) {
+                document.getElementById('nameFontFamily').addEventListener('change', function () {
+                    getCurrentBlockSettings().nameFontFamily = this.value;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('nameFontSize')) {
+                document.getElementById('nameFontSize').addEventListener('input', function () {
+                    getCurrentBlockSettings().nameFontSize = parseInt(this.value) || 8;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('nameFontSizeUp')) {
+                document.getElementById('nameFontSizeUp').addEventListener('click', function () {
+                    const input = document.getElementById('nameFontSize');
+                    const newValue = Math.min(parseInt(input.value) + 1, parseInt(input.max));
+                    input.value = newValue;
+                    getCurrentBlockSettings().nameFontSize = newValue;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('nameFontSizeDown')) {
+                document.getElementById('nameFontSizeDown').addEventListener('click', function () {
+                    const input = document.getElementById('nameFontSize');
+                    const newValue = Math.max(parseInt(input.value) - 1, parseInt(input.min));
+                    input.value = newValue;
+                    getCurrentBlockSettings().nameFontSize = newValue;
+                    renderAllBlocks();
+                });
+            }
+
+            // Google Sheets Integration Buttons
+            if (document.getElementById('creaditSheet')) {
+                document.getElementById('creaditSheet').addEventListener('click', function () {
+                    openGoogleSheetForEditing();
+                });
+            }
+            
+            if (document.getElementById('syncCredits')) {
+                document.getElementById('syncCredits').addEventListener('click', function () {
+                    syncCreditsFromGoogleSheet();
+                });
+            }
+
+            // Add auto-save to all remaining controls that might not have it
+            addAutoSaveToAllControls();
+
             // When switching block, populate tools
             window.populateTools = populateTools;
+        }
+
+        // Helper function to add auto-save to all controls
+        function addAutoSaveToAllControls() {
+            // Add auto-save to all input, select, and button controls
+            const controls = document.querySelectorAll('#layoutPanel input, #layoutPanel select, #fontPanel input, #fontPanel select');
+            controls.forEach(control => {
+                if (!control.hasAutoSave) { // Prevent duplicate listeners
+                    control.addEventListener('input', autoSaveSettings);
+                    control.addEventListener('change', autoSaveSettings);
+                    control.hasAutoSave = true;
+                }
+            });
+
+            // Add auto-save to all style buttons
+            const buttons = document.querySelectorAll('.align-btn, .gutter-btn, .order-btn, .inset-btn, .heading-style-btn, .subheading-style-btn');
+            buttons.forEach(button => {
+                if (!button.hasAutoSave) { // Prevent duplicate listeners
+                    button.addEventListener('click', autoSaveSettings);
+                    button.hasAutoSave = true;
+                }
+            });
+
+            console.log('Added auto-save to all controls');
         }
 
         // Fetch and parse CSV
@@ -974,34 +1513,37 @@
 
         // Render all blocks for scrolling template
         function renderAllBlocks(callback) {
-            const contentDiv = document.getElementById('sheetContent');
-            // Remove overflow-y:auto and max-height to disable vertical/horizontal scrollbars
-            contentDiv.innerHTML = `
-                <div id="all-blocks-container" style="width:100%; background:#101014; border-radius:14px; box-shadow:0 0 0 1px #222; padding:2.5rem 0;">
-                </div>
-            `;
-            const container = document.getElementById('all-blocks-container');
-            blockOffsets = [];
-            blockNames.forEach((blockName, idx) => {
-                let blockRows = [];
-                let foundBlock = false;
-                for (let i = 0; i < sheetData.length; i++) {
-                    if (sheetData[i][0] && sheetData[i][0].trim() === blockName) {
-                        foundBlock = true;
-                        continue;
+            try {
+                console.log('Rendering all blocks...');
+                const contentDiv = document.getElementById('sheetContent');
+                // Remove overflow-y:auto and max-height to disable vertical/horizontal scrollbars
+                contentDiv.innerHTML = `
+                    <div id="all-blocks-container" style="width:100%; background:#101014; border-radius:14px; box-shadow:0 0 0 1px #222; padding:2.5rem 0;">
+                    </div>
+                `;
+                const container = document.getElementById('all-blocks-container');
+                blockOffsets = [];
+                blockNames.forEach((blockName, idx) => {
+                    console.log(`Rendering block ${idx}: ${blockName}`);
+                    let blockRows = [];
+                    let foundBlock = false;
+                    for (let i = 0; i < sheetData.length; i++) {
+                        if (sheetData[i][0] && sheetData[i][0].trim() === blockName) {
+                            foundBlock = true;
+                            continue;
+                        }
+                        if (foundBlock) {
+                            if (sheetData[i][0] && sheetData[i][0].trim() !== '') break;
+                            blockRows.push(sheetData[i]);
+                        }
                     }
-                    if (foundBlock) {
-                        if (sheetData[i][0] && sheetData[i][0].trim() !== '') break;
-                        blockRows.push(sheetData[i]);
-                    }
-                }
-                let leftCol = [];
-                let rightCol = [];
-                // Use per-block settings
-                const settings = perBlockSettings[idx] || getDefaultBlockSettings();
-                
-                // Debug logging
-                console.log(`Block ${idx} settings:`, settings);
+                    let leftCol = [];
+                    let rightCol = [];
+                    // Use per-block settings
+                    const settings = perBlockSettings[idx] || getDefaultBlockSettings();
+                    
+                    // Debug logging
+                    console.log(`Block ${idx} settings:`, settings);
                 blockRows.forEach(row => {
                     const role = row[1] ? row[1].trim() : '';
                     const name = row[2] ? row[2].trim() : '';
@@ -1066,17 +1608,24 @@
                     const headingDiv = document.createElement('div');
                     headingDiv.style.fontSize = (settings.headingFontSize || 24) + 'px';
                     headingDiv.style.fontFamily = settings.headingFontFamily || 'Noto Sans';
-                    headingDiv.style.fontWeight = settings.headingFontWeight || 600;
                     headingDiv.style.letterSpacing = (settings.headingLetterSpacing || 0) + 'em';
                     headingDiv.style.lineHeight = settings.headingLineHeight || 1.2;
                     headingDiv.style.color = settings.headingColor || '#ffffff';
                     headingDiv.style.marginBottom = '0.2em';
                     headingDiv.style.textAlign = 'center';
                     
-                    // Apply text decorations
-                    if (settings.headingBold) headingDiv.style.fontWeight = 'bold';
-                    if (settings.headingItalic) headingDiv.style.fontStyle = 'italic';
-                    if (settings.headingUnderline) headingDiv.style.textDecoration = 'underline';
+                    // Apply text decorations from headingStyles array
+                    if (settings.headingStyles && settings.headingStyles.includes('bold')) {
+                        headingDiv.style.fontWeight = 'bold';
+                    } else {
+                        headingDiv.style.fontWeight = settings.headingFontWeight || 600;
+                    }
+                    if (settings.headingStyles && settings.headingStyles.includes('italic')) {
+                        headingDiv.style.fontStyle = 'italic';
+                    }
+                    if (settings.headingStyles && settings.headingStyles.includes('underline')) {
+                        headingDiv.style.textDecoration = 'underline';
+                    }
                     
                     headingDiv.textContent = heading;
                     blockSection.appendChild(headingDiv);
@@ -1085,9 +1634,25 @@
                     const subHeadingDiv = document.createElement('div');
                     subHeadingDiv.style.fontSize = (settings.subHeadingFontSize || 12) + 'px';
                     subHeadingDiv.style.fontFamily = settings.subHeadingFontFamily || 'Oswald';
-                    subHeadingDiv.style.color = '#aaa';
+                    subHeadingDiv.style.letterSpacing = (settings.subHeadingLetterSpacing || 0) + 'em';
+                    subHeadingDiv.style.lineHeight = settings.subHeadingLineHeight || 1.2;
+                    subHeadingDiv.style.color = settings.subHeadingColor || '#aaa';
                     subHeadingDiv.style.marginBottom = '1em';
                     subHeadingDiv.style.textAlign = 'center';
+                    
+                    // Apply text decorations from subHeadingStyles array
+                    if (settings.subHeadingStyles && settings.subHeadingStyles.includes('bold')) {
+                        subHeadingDiv.style.fontWeight = 'bold';
+                    } else {
+                        subHeadingDiv.style.fontWeight = settings.subHeadingFontWeight || 400;
+                    }
+                    if (settings.subHeadingStyles && settings.subHeadingStyles.includes('italic')) {
+                        subHeadingDiv.style.fontStyle = 'italic';
+                    }
+                    if (settings.subHeadingStyles && settings.subHeadingStyles.includes('underline')) {
+                        subHeadingDiv.style.textDecoration = 'underline';
+                    }
+                    
                     subHeadingDiv.textContent = subHeading;
                     blockSection.appendChild(subHeadingDiv);
                 }
@@ -1222,6 +1787,27 @@
             if (typeof callback === 'function') {
                 setTimeout(callback, 100);
             }
+            console.log('Finished rendering all blocks');
+            
+            // Auto-save settings after rendering (debounced)
+            autoSaveSettings();
+            } catch (error) {
+                console.error('Error in renderAllBlocks:', error);
+            }
+        }
+
+        // Debounced auto-save function to prevent excessive API calls
+        let autoSaveTimeout;
+        function autoSaveSettings() {
+            clearTimeout(autoSaveTimeout);
+            autoSaveTimeout = setTimeout(async () => {
+                try {
+                    await saveAllBlockSettings();
+                    console.log('Auto-saved settings to database for project:', PROJECT_ID, PROJECT_NAME);
+                } catch (error) {
+                    console.warn('Auto-save failed:', error);
+                }
+            }, 1000); // Wait 1 second after last change before saving (reduced from 2 seconds for better UX)
         }
 
         // Update UI controls to match current block settings
@@ -1310,7 +1896,11 @@
                 
                 if (document.getElementById('subHeadingFontFamily')) {
                     document.getElementById('subHeadingFontFamily').value = settings.subHeadingFontFamily || 'Oswald';
+                    document.getElementById('subHeadingFontWeight').value = settings.subHeadingFontWeight || 400;
                     document.getElementById('subHeadingFontSize').value = settings.subHeadingFontSize || 12;
+                    document.getElementById('subHeadingLetterSpacing').value = settings.subHeadingLetterSpacing || 0;
+                    document.getElementById('subHeadingLineHeight').value = settings.subHeadingLineHeight || 1.2;
+                    document.getElementById('subHeadingColor').value = settings.subHeadingColor || '#ffffff';
                 }
                 
                 if (document.getElementById('roleFontFamily')) {
@@ -1326,14 +1916,24 @@
                 // Update heading style buttons
                 document.querySelectorAll('.heading-style-btn').forEach(btn => {
                     const style = btn.dataset.style;
-                    if (style === 'bold' && settings.headingBold) {
+                    if (settings.headingStyles && settings.headingStyles.includes(style)) {
                         btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                    } else if (style === 'italic' && settings.headingItalic) {
-                        btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                    } else if (style === 'underline' && settings.headingUnderline) {
-                        btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                        btn.style.borderColor = '#667eea';
                     } else {
                         btn.style.background = 'rgba(255,255,255,0.1)';
+                        btn.style.borderColor = 'rgba(255,255,255,0.2)';
+                    }
+                });
+                
+                // Update sub heading style buttons
+                document.querySelectorAll('.subheading-style-btn').forEach(btn => {
+                    const style = btn.dataset.style;
+                    if (settings.subHeadingStyles && settings.subHeadingStyles.includes(style)) {
+                        btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                        btn.style.borderColor = '#667eea';
+                    } else {
+                        btn.style.background = 'rgba(255,255,255,0.1)';
+                        btn.style.borderColor = 'rgba(255,255,255,0.2)';
                     }
                 });
                 
@@ -1349,44 +1949,50 @@
             renderAllBlocks();
         }
 
-        // Save all block settings to localStorage with error handling
-        function saveAllBlockSettings() {
+        // Save all block settings to database with error handling
+        async function saveAllBlockSettings() {
             try {
-                const settingsToSave = JSON.stringify(perBlockSettings);
-                localStorage.setItem('blockSettings', settingsToSave);
-                console.log('Block settings saved successfully');
-                return true;
+                console.log('Saving block settings to database for project:', PROJECT_ID, PROJECT_NAME);
+                
+                const response = await fetch('/api/block-settings/save', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        perBlockSettings: perBlockSettings,
+                        projectId: PROJECT_ID,
+                        projectName: PROJECT_NAME
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    console.log('Block settings saved successfully to database');
+                    // Also save to localStorage as backup
+                    localStorage.setItem('blockSettings', JSON.stringify(perBlockSettings));
+                    return true;
+                } else {
+                    console.error('Failed to save block settings:', result.message);
+                    // Fallback to localStorage
+                    localStorage.setItem('blockSettings', JSON.stringify(perBlockSettings));
+                    return false;
+                }
             } catch (error) {
                 console.error('Error saving block settings:', error);
-                return false;
+                // Fallback to localStorage
+                try {
+                    localStorage.setItem('blockSettings', JSON.stringify(perBlockSettings));
+                    return true;
+                } catch (localError) {
+                    console.error('Error saving to localStorage as fallback:', localError);
+                    return false;
+                }
             }
         }
-            // let indicator = document.getElementById('floating-indicator');
-            // if (!indicator) {
-            //     indicator = document.createElement('div');
-            //     indicator.id = 'floating-indicator';
-            //     indicator.style.position = 'fixed';
-            //     indicator.style.top = '24px';
-            //     indicator.style.left = '50%';
-            //     indicator.style.transform = 'translateX(-50%)';
-            //     indicator.style.background = '#23233a';
-            //     indicator.style.color = '#fff';
-            //     indicator.style.padding = '10px 32px';
-            //     indicator.style.borderRadius = '8px';
-            //     indicator.style.boxShadow = '0 2px 16px #0008';
-            //     indicator.style.zIndex = '9999';
-            //     indicator.style.fontWeight = '600';
-            //     indicator.style.fontSize = '1.1rem';
-            //     indicator.style.opacity = '0';
-            //     indicator.style.transition = 'opacity 0.3s';
-            //     document.body.appendChild(indicator);
-            // }
-            // indicator.textContent = text;
-            // indicator.style.opacity = '1';
-            // setTimeout(() => {
-            //     indicator.style.opacity = '0';
-            // }, 1800);
-        // }
 
         function scrollToBlock(idx, smooth = false) {
             // Update active block index

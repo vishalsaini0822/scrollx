@@ -10,7 +10,10 @@ class Project extends Model
         'template_name',
         'end_credits_type',
         'resolution',
-        'user_id','status',
+        'user_id',
+        'status',
+        'google_sheet_url',
+        'google_sheet_id',
     ];
 
     /**

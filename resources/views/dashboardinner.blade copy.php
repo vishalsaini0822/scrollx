@@ -184,17 +184,17 @@
                         </div>
                         <div class="row g-2 mb-2">
                             <div class="col-6">
-                                <label class="form-label mb-1">Margin</label>
-                                <select class="form-select form-select-sm" id="margin">
-                                    <option>Vertical</option>
-                                    <option>Horizontal</option>
+                                <label class="form-label mb-1" style="font-weight: 500; color: #e2e8f0;">Margin</label>
+                                <select class="form-select form-select-sm modern-card" id="margin" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 8px;">
+                                    <option style="background: #2d3748; color: #fff;">Vertical</option>
+                                    <option style="background: #2d3748; color: #fff;">Horizontal</option>
                                 </select>
                             </div>
                             <div class="col-6">
-                                <label class="form-label mb-1">Bottom</label>
+                                <label class="form-label mb-1" style="font-weight: 500; color: #e2e8f0;">Bottom</label>
                                 <div class="input-group input-group-sm">
-                                    <input type="number" class="form-control" id="marginBottom" value="0">
-                                    <span class="input-group-text">px</span>
+                                    <input type="number" class="form-control modern-card" id="marginBottom" value="0" min="0" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 8px 0 0 8px;">
+                                    <span class="input-group-text modern-card" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #a0aec0; border-radius: 0 8px 8px 0;">px</span>
                                 </div>
                             </div>
                         </div>
@@ -298,6 +298,17 @@
                                     </select>
                                 </div>
                                 <div class="col-6">
+                                    <select class="form-select form-select-sm modern-card" id="subHeadingFontWeight" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 8px;">
+                                        <option value="300" style="background: #2d3748; color: #fff;">Light</option>
+                                        <option value="400" style="background: #2d3748; color: #fff;">Regular</option>
+                                        <option value="500" style="background: #2d3748; color: #fff;">Medium</option>
+                                        <option value="600" style="background: #2d3748; color: #fff;">Semibold</option>
+                                        <option value="700" style="background: #2d3748; color: #fff;">Bold</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row g-2 mb-2">
+                                <div class="col-4">
                                     <div class="input-group input-group-sm">
                                         <button class="btn btn-outline-light" type="button" id="subHeadingFontSizeDown" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
                                             <i class="bi bi-chevron-down"></i>
@@ -306,7 +317,40 @@
                                         <button class="btn btn-outline-light" type="button" id="subHeadingFontSizeUp" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
                                             <i class="bi bi-chevron-up"></i>
                                         </button>
-                                        <span class="input-group-text" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff;">PX</span>
+                                        <span class="input-group-text" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff;">px</span>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-text" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff;">A|A</span>
+                                        <input type="number" class="form-control text-center modern-card" id="subHeadingLetterSpacing" value="0" step="0.1" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff;">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-text" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff;">↓</span>
+                                        <input type="number" class="form-control text-center modern-card" id="subHeadingLineHeight" value="1.2" step="0.1" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-2 mb-2">
+                                <div class="col-6">
+                                    <div class="btn-group w-100" role="group">
+                                        <button type="button" class="btn btn-outline-light btn-sm subheading-style-btn" data-style="bold" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                                            <strong>B</strong>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-light btn-sm subheading-style-btn" data-style="italic" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                                            <em>I</em>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-light btn-sm subheading-style-btn" data-style="underline" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                                            <u>U</u>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-text" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff;">#</span>
+                                        <input type="color" class="form-control form-control-color modern-card" id="subHeadingColor" value="#ffffff" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 2px; border-radius: 0 8px 8px 0;">
                                     </div>
                                 </div>
                             </div>
@@ -428,9 +472,12 @@
 
         // Helper to get current block settings (moved to global scope)
         function getCurrentBlockSettings() {
+            console.log('Getting settings for block:', activeBlockIdx);
             if (!perBlockSettings[activeBlockIdx]) {
+                console.log('Creating new settings for block:', activeBlockIdx);
                 perBlockSettings[activeBlockIdx] = getDefaultBlockSettings();
             }
+            console.log('Current block settings:', perBlockSettings[activeBlockIdx]);
             return perBlockSettings[activeBlockIdx];
         }
 
@@ -457,13 +504,16 @@
                 headingLetterSpacing: 0,
                 headingLineHeight: 1.2,
                 headingColor: '#ffffff',
-                headingBold: false,
-                headingItalic: false,
-                headingUnderline: false,
+                headingStyles: [], // Array for bold, italic, underline
                 
                 // Sub Heading Typography
                 subHeadingFontFamily: 'Oswald',
                 subHeadingFontSize: 12,
+                subHeadingFontWeight: 400,
+                subHeadingLetterSpacing: 0,
+                subHeadingLineHeight: 1.2,
+                subHeadingColor: '#ffffff',
+                subHeadingStyles: [], // Array for bold, italic, underline
                 
                 // Role Typography
                 roleFontFamily: 'Noto Sans',
@@ -730,8 +780,14 @@
             // Order buttons
             document.querySelectorAll('.order-btn').forEach(btn => {
                 btn.addEventListener('click', function () {
-                    document.querySelectorAll('.order-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.order-btn').forEach(b => {
+                        b.classList.remove('active');
+                        b.style.background = 'rgba(255,255,255,0.1)';
+                        b.style.borderColor = 'rgba(255,255,255,0.2)';
+                    });
                     this.classList.add('active');
+                    this.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                    this.style.borderColor = '#667eea';
                     getCurrentBlockSettings().order = this.dataset.order;
                     renderAllBlocks();
                 });
@@ -785,6 +841,261 @@
                 document.getElementById('fontWeight').addEventListener('change', function () {
                     getCurrentBlockSettings().fontWeight = parseInt(this.value) || 600;
                     renderAllBlocks();
+                });
+            }
+
+            // Heading Font Controls
+            if (document.getElementById('headingFontFamily')) {
+                document.getElementById('headingFontFamily').addEventListener('change', function () {
+                    console.log('Heading font family changed to:', this.value);
+                    getCurrentBlockSettings().headingFontFamily = this.value;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('headingFontWeight')) {
+                document.getElementById('headingFontWeight').addEventListener('change', function () {
+                    console.log('Heading font weight changed to:', this.value);
+                    getCurrentBlockSettings().headingFontWeight = parseInt(this.value) || 600;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('headingFontSize')) {
+                document.getElementById('headingFontSize').addEventListener('input', function () {
+                    console.log('Heading font size changed to:', this.value);
+                    getCurrentBlockSettings().headingFontSize = parseInt(this.value) || 24;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('headingFontSizeUp')) {
+                document.getElementById('headingFontSizeUp').addEventListener('click', function () {
+                    const input = document.getElementById('headingFontSize');
+                    const newValue = Math.min(parseInt(input.value) + 1, parseInt(input.max));
+                    input.value = newValue;
+                    getCurrentBlockSettings().headingFontSize = newValue;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('headingFontSizeDown')) {
+                document.getElementById('headingFontSizeDown').addEventListener('click', function () {
+                    const input = document.getElementById('headingFontSize');
+                    const newValue = Math.max(parseInt(input.value) - 1, parseInt(input.min));
+                    input.value = newValue;
+                    getCurrentBlockSettings().headingFontSize = newValue;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('headingLetterSpacing')) {
+                document.getElementById('headingLetterSpacing').addEventListener('input', function () {
+                    getCurrentBlockSettings().headingLetterSpacing = parseFloat(this.value) || 0;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('headingLineHeight')) {
+                document.getElementById('headingLineHeight').addEventListener('input', function () {
+                    getCurrentBlockSettings().headingLineHeight = parseFloat(this.value) || 1.2;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('headingColor')) {
+                document.getElementById('headingColor').addEventListener('input', function () {
+                    getCurrentBlockSettings().headingColor = this.value;
+                    renderAllBlocks();
+                });
+            }
+
+            // Heading Style Buttons
+            document.querySelectorAll('.heading-style-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const style = this.dataset.style;
+                    const settings = getCurrentBlockSettings();
+                    
+                    if (!settings.headingStyles) settings.headingStyles = [];
+                    
+                    if (settings.headingStyles.includes(style)) {
+                        settings.headingStyles = settings.headingStyles.filter(s => s !== style);
+                        this.style.background = 'rgba(255,255,255,0.1)';
+                        this.style.borderColor = 'rgba(255,255,255,0.2)';
+                    } else {
+                        settings.headingStyles.push(style);
+                        this.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                        this.style.borderColor = '#667eea';
+                    }
+                    
+                    renderAllBlocks();
+                });
+            });
+
+            // Sub Heading Font Controls
+            if (document.getElementById('subHeadingFontFamily')) {
+                document.getElementById('subHeadingFontFamily').addEventListener('change', function () {
+                    console.log('Sub heading font family changed to:', this.value);
+                    getCurrentBlockSettings().subHeadingFontFamily = this.value;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('subHeadingFontWeight')) {
+                document.getElementById('subHeadingFontWeight').addEventListener('change', function () {
+                    console.log('Sub heading font weight changed to:', this.value);
+                    getCurrentBlockSettings().subHeadingFontWeight = parseInt(this.value) || 400;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('subHeadingFontSize')) {
+                document.getElementById('subHeadingFontSize').addEventListener('input', function () {
+                    console.log('Sub heading font size changed to:', this.value);
+                    getCurrentBlockSettings().subHeadingFontSize = parseInt(this.value) || 12;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('subHeadingFontSizeUp')) {
+                document.getElementById('subHeadingFontSizeUp').addEventListener('click', function () {
+                    const input = document.getElementById('subHeadingFontSize');
+                    const newValue = Math.min(parseInt(input.value) + 1, parseInt(input.max));
+                    input.value = newValue;
+                    getCurrentBlockSettings().subHeadingFontSize = newValue;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('subHeadingFontSizeDown')) {
+                document.getElementById('subHeadingFontSizeDown').addEventListener('click', function () {
+                    const input = document.getElementById('subHeadingFontSize');
+                    const newValue = Math.max(parseInt(input.value) - 1, parseInt(input.min));
+                    input.value = newValue;
+                    getCurrentBlockSettings().subHeadingFontSize = newValue;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('subHeadingLetterSpacing')) {
+                document.getElementById('subHeadingLetterSpacing').addEventListener('input', function () {
+                    getCurrentBlockSettings().subHeadingLetterSpacing = parseFloat(this.value) || 0;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('subHeadingLineHeight')) {
+                document.getElementById('subHeadingLineHeight').addEventListener('input', function () {
+                    getCurrentBlockSettings().subHeadingLineHeight = parseFloat(this.value) || 1.2;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('subHeadingColor')) {
+                document.getElementById('subHeadingColor').addEventListener('input', function () {
+                    getCurrentBlockSettings().subHeadingColor = this.value;
+                    renderAllBlocks();
+                });
+            }
+
+            // Sub Heading Style Buttons
+            document.querySelectorAll('.subheading-style-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const style = this.dataset.style;
+                    const settings = getCurrentBlockSettings();
+                    
+                    if (!settings.subHeadingStyles) settings.subHeadingStyles = [];
+                    
+                    if (settings.subHeadingStyles.includes(style)) {
+                        settings.subHeadingStyles = settings.subHeadingStyles.filter(s => s !== style);
+                        this.style.background = 'rgba(255,255,255,0.1)';
+                        this.style.borderColor = 'rgba(255,255,255,0.2)';
+                    } else {
+                        settings.subHeadingStyles.push(style);
+                        this.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                        this.style.borderColor = '#667eea';
+                    }
+                    
+                    renderAllBlocks();
+                });
+            });
+
+            // Role Font Controls
+            if (document.getElementById('roleFontFamily')) {
+                document.getElementById('roleFontFamily').addEventListener('change', function () {
+                    getCurrentBlockSettings().roleFontFamily = this.value;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('roleFontSize')) {
+                document.getElementById('roleFontSize').addEventListener('input', function () {
+                    getCurrentBlockSettings().roleFontSize = parseInt(this.value) || 8;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('roleFontSizeUp')) {
+                document.getElementById('roleFontSizeUp').addEventListener('click', function () {
+                    const input = document.getElementById('roleFontSize');
+                    const newValue = Math.min(parseInt(input.value) + 1, parseInt(input.max));
+                    input.value = newValue;
+                    getCurrentBlockSettings().roleFontSize = newValue;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('roleFontSizeDown')) {
+                document.getElementById('roleFontSizeDown').addEventListener('click', function () {
+                    const input = document.getElementById('roleFontSize');
+                    const newValue = Math.max(parseInt(input.value) - 1, parseInt(input.min));
+                    input.value = newValue;
+                    getCurrentBlockSettings().roleFontSize = newValue;
+                    renderAllBlocks();
+                });
+            }
+
+            // Name Font Controls
+            if (document.getElementById('nameFontFamily')) {
+                document.getElementById('nameFontFamily').addEventListener('change', function () {
+                    getCurrentBlockSettings().nameFontFamily = this.value;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('nameFontSize')) {
+                document.getElementById('nameFontSize').addEventListener('input', function () {
+                    getCurrentBlockSettings().nameFontSize = parseInt(this.value) || 8;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('nameFontSizeUp')) {
+                document.getElementById('nameFontSizeUp').addEventListener('click', function () {
+                    const input = document.getElementById('nameFontSize');
+                    const newValue = Math.min(parseInt(input.value) + 1, parseInt(input.max));
+                    input.value = newValue;
+                    getCurrentBlockSettings().nameFontSize = newValue;
+                    renderAllBlocks();
+                });
+            }
+            if (document.getElementById('nameFontSizeDown')) {
+                document.getElementById('nameFontSizeDown').addEventListener('click', function () {
+                    const input = document.getElementById('nameFontSize');
+                    const newValue = Math.max(parseInt(input.value) - 1, parseInt(input.min));
+                    input.value = newValue;
+                    getCurrentBlockSettings().nameFontSize = newValue;
+                    renderAllBlocks();
+                });
+            }
+
+            // Save Block Settings button
+            if (document.getElementById('saveBlockSettings')) {
+                document.getElementById('saveBlockSettings').addEventListener('click', function () {
+                    if (saveAllBlockSettings()) {
+                        // Visual feedback for successful save
+                        const button = this;
+                        const originalText = button.textContent;
+                        button.textContent = 'Saved!';
+                        button.style.background = 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)';
+                        
+                        setTimeout(() => {
+                            button.textContent = originalText;
+                            button.style.background = 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)';
+                        }, 1500);
+                    } else {
+                        // Error feedback
+                        const button = this;
+                        const originalText = button.textContent;
+                        button.textContent = 'Error Saving';
+                        button.style.background = 'linear-gradient(135deg, #f56565 0%, #e53e3e 100%)';
+                        
+                        setTimeout(() => {
+                            button.textContent = originalText;
+                            button.style.background = 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)';
+                        }, 1500);
+                    }
                 });
             }
 
@@ -974,34 +1285,37 @@
 
         // Render all blocks for scrolling template
         function renderAllBlocks(callback) {
-            const contentDiv = document.getElementById('sheetContent');
-            // Remove overflow-y:auto and max-height to disable vertical/horizontal scrollbars
-            contentDiv.innerHTML = `
-                <div id="all-blocks-container" style="width:100%; background:#101014; border-radius:14px; box-shadow:0 0 0 1px #222; padding:2.5rem 0;">
-                </div>
-            `;
-            const container = document.getElementById('all-blocks-container');
-            blockOffsets = [];
-            blockNames.forEach((blockName, idx) => {
-                let blockRows = [];
-                let foundBlock = false;
-                for (let i = 0; i < sheetData.length; i++) {
-                    if (sheetData[i][0] && sheetData[i][0].trim() === blockName) {
-                        foundBlock = true;
-                        continue;
+            try {
+                console.log('Rendering all blocks...');
+                const contentDiv = document.getElementById('sheetContent');
+                // Remove overflow-y:auto and max-height to disable vertical/horizontal scrollbars
+                contentDiv.innerHTML = `
+                    <div id="all-blocks-container" style="width:100%; background:#101014; border-radius:14px; box-shadow:0 0 0 1px #222; padding:2.5rem 0;">
+                    </div>
+                `;
+                const container = document.getElementById('all-blocks-container');
+                blockOffsets = [];
+                blockNames.forEach((blockName, idx) => {
+                    console.log(`Rendering block ${idx}: ${blockName}`);
+                    let blockRows = [];
+                    let foundBlock = false;
+                    for (let i = 0; i < sheetData.length; i++) {
+                        if (sheetData[i][0] && sheetData[i][0].trim() === blockName) {
+                            foundBlock = true;
+                            continue;
+                        }
+                        if (foundBlock) {
+                            if (sheetData[i][0] && sheetData[i][0].trim() !== '') break;
+                            blockRows.push(sheetData[i]);
+                        }
                     }
-                    if (foundBlock) {
-                        if (sheetData[i][0] && sheetData[i][0].trim() !== '') break;
-                        blockRows.push(sheetData[i]);
-                    }
-                }
-                let leftCol = [];
-                let rightCol = [];
-                // Use per-block settings
-                const settings = perBlockSettings[idx] || getDefaultBlockSettings();
-                
-                // Debug logging
-                console.log(`Block ${idx} settings:`, settings);
+                    let leftCol = [];
+                    let rightCol = [];
+                    // Use per-block settings
+                    const settings = perBlockSettings[idx] || getDefaultBlockSettings();
+                    
+                    // Debug logging
+                    console.log(`Block ${idx} settings:`, settings);
                 blockRows.forEach(row => {
                     const role = row[1] ? row[1].trim() : '';
                     const name = row[2] ? row[2].trim() : '';
@@ -1066,17 +1380,24 @@
                     const headingDiv = document.createElement('div');
                     headingDiv.style.fontSize = (settings.headingFontSize || 24) + 'px';
                     headingDiv.style.fontFamily = settings.headingFontFamily || 'Noto Sans';
-                    headingDiv.style.fontWeight = settings.headingFontWeight || 600;
                     headingDiv.style.letterSpacing = (settings.headingLetterSpacing || 0) + 'em';
                     headingDiv.style.lineHeight = settings.headingLineHeight || 1.2;
                     headingDiv.style.color = settings.headingColor || '#ffffff';
                     headingDiv.style.marginBottom = '0.2em';
                     headingDiv.style.textAlign = 'center';
                     
-                    // Apply text decorations
-                    if (settings.headingBold) headingDiv.style.fontWeight = 'bold';
-                    if (settings.headingItalic) headingDiv.style.fontStyle = 'italic';
-                    if (settings.headingUnderline) headingDiv.style.textDecoration = 'underline';
+                    // Apply text decorations from headingStyles array
+                    if (settings.headingStyles && settings.headingStyles.includes('bold')) {
+                        headingDiv.style.fontWeight = 'bold';
+                    } else {
+                        headingDiv.style.fontWeight = settings.headingFontWeight || 600;
+                    }
+                    if (settings.headingStyles && settings.headingStyles.includes('italic')) {
+                        headingDiv.style.fontStyle = 'italic';
+                    }
+                    if (settings.headingStyles && settings.headingStyles.includes('underline')) {
+                        headingDiv.style.textDecoration = 'underline';
+                    }
                     
                     headingDiv.textContent = heading;
                     blockSection.appendChild(headingDiv);
@@ -1085,9 +1406,25 @@
                     const subHeadingDiv = document.createElement('div');
                     subHeadingDiv.style.fontSize = (settings.subHeadingFontSize || 12) + 'px';
                     subHeadingDiv.style.fontFamily = settings.subHeadingFontFamily || 'Oswald';
-                    subHeadingDiv.style.color = '#aaa';
+                    subHeadingDiv.style.letterSpacing = (settings.subHeadingLetterSpacing || 0) + 'em';
+                    subHeadingDiv.style.lineHeight = settings.subHeadingLineHeight || 1.2;
+                    subHeadingDiv.style.color = settings.subHeadingColor || '#aaa';
                     subHeadingDiv.style.marginBottom = '1em';
                     subHeadingDiv.style.textAlign = 'center';
+                    
+                    // Apply text decorations from subHeadingStyles array
+                    if (settings.subHeadingStyles && settings.subHeadingStyles.includes('bold')) {
+                        subHeadingDiv.style.fontWeight = 'bold';
+                    } else {
+                        subHeadingDiv.style.fontWeight = settings.subHeadingFontWeight || 400;
+                    }
+                    if (settings.subHeadingStyles && settings.subHeadingStyles.includes('italic')) {
+                        subHeadingDiv.style.fontStyle = 'italic';
+                    }
+                    if (settings.subHeadingStyles && settings.subHeadingStyles.includes('underline')) {
+                        subHeadingDiv.style.textDecoration = 'underline';
+                    }
+                    
                     subHeadingDiv.textContent = subHeading;
                     blockSection.appendChild(subHeadingDiv);
                 }
@@ -1222,6 +1559,10 @@
             if (typeof callback === 'function') {
                 setTimeout(callback, 100);
             }
+            console.log('Finished rendering all blocks');
+            } catch (error) {
+                console.error('Error in renderAllBlocks:', error);
+            }
         }
 
         // Update UI controls to match current block settings
@@ -1310,7 +1651,11 @@
                 
                 if (document.getElementById('subHeadingFontFamily')) {
                     document.getElementById('subHeadingFontFamily').value = settings.subHeadingFontFamily || 'Oswald';
+                    document.getElementById('subHeadingFontWeight').value = settings.subHeadingFontWeight || 400;
                     document.getElementById('subHeadingFontSize').value = settings.subHeadingFontSize || 12;
+                    document.getElementById('subHeadingLetterSpacing').value = settings.subHeadingLetterSpacing || 0;
+                    document.getElementById('subHeadingLineHeight').value = settings.subHeadingLineHeight || 1.2;
+                    document.getElementById('subHeadingColor').value = settings.subHeadingColor || '#ffffff';
                 }
                 
                 if (document.getElementById('roleFontFamily')) {
@@ -1326,14 +1671,24 @@
                 // Update heading style buttons
                 document.querySelectorAll('.heading-style-btn').forEach(btn => {
                     const style = btn.dataset.style;
-                    if (style === 'bold' && settings.headingBold) {
+                    if (settings.headingStyles && settings.headingStyles.includes(style)) {
                         btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                    } else if (style === 'italic' && settings.headingItalic) {
-                        btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                    } else if (style === 'underline' && settings.headingUnderline) {
-                        btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                        btn.style.borderColor = '#667eea';
                     } else {
                         btn.style.background = 'rgba(255,255,255,0.1)';
+                        btn.style.borderColor = 'rgba(255,255,255,0.2)';
+                    }
+                });
+                
+                // Update sub heading style buttons
+                document.querySelectorAll('.subheading-style-btn').forEach(btn => {
+                    const style = btn.dataset.style;
+                    if (settings.subHeadingStyles && settings.subHeadingStyles.includes(style)) {
+                        btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                        btn.style.borderColor = '#667eea';
+                    } else {
+                        btn.style.background = 'rgba(255,255,255,0.1)';
+                        btn.style.borderColor = 'rgba(255,255,255,0.2)';
                     }
                 });
                 
@@ -1361,32 +1716,6 @@
                 return false;
             }
         }
-            // let indicator = document.getElementById('floating-indicator');
-            // if (!indicator) {
-            //     indicator = document.createElement('div');
-            //     indicator.id = 'floating-indicator';
-            //     indicator.style.position = 'fixed';
-            //     indicator.style.top = '24px';
-            //     indicator.style.left = '50%';
-            //     indicator.style.transform = 'translateX(-50%)';
-            //     indicator.style.background = '#23233a';
-            //     indicator.style.color = '#fff';
-            //     indicator.style.padding = '10px 32px';
-            //     indicator.style.borderRadius = '8px';
-            //     indicator.style.boxShadow = '0 2px 16px #0008';
-            //     indicator.style.zIndex = '9999';
-            //     indicator.style.fontWeight = '600';
-            //     indicator.style.fontSize = '1.1rem';
-            //     indicator.style.opacity = '0';
-            //     indicator.style.transition = 'opacity 0.3s';
-            //     document.body.appendChild(indicator);
-            // }
-            // indicator.textContent = text;
-            // indicator.style.opacity = '1';
-            // setTimeout(() => {
-            //     indicator.style.opacity = '0';
-            // }, 1800);
-        // }
 
         function scrollToBlock(idx, smooth = false) {
             // Update active block index

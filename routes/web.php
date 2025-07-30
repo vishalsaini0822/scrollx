@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlockSettingsController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RenderController;
 use App\Http\Controllers\SheetController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\UserController;
@@ -182,13 +184,44 @@ Route::middleware(['auth'])->group(function () {
     
     
     Route::get('credit/{id}', [ProjectController::class, 'credit'])->name('dashboard.credit');
+    Route::get('render/{id}', [ProjectController::class, 'render'])->name('dashboard.render');
     Route::post('save-block-settings', [ProjectController::class, 'saveBlockSettings'])->name('dashboard.saveBlockSettings');
+    
+    // Block Settings API routes
+    Route::post('api/block-settings/save', [BlockSettingsController::class, 'saveBlockSettings'])->name('api.block-settings.save');
+    Route::get('api/block-settings/load', [BlockSettingsController::class, 'loadBlockSettings'])->name('api.block-settings.load');
+    Route::get('api/block-settings/projects', [BlockSettingsController::class, 'getUserProjects'])->name('api.block-settings.projects');
+    Route::delete('api/block-settings/delete', [BlockSettingsController::class, 'deleteProject'])->name('api.block-settings.delete');
+    
+    // Google Sheets Integration API routes
+    Route::get('api/project-google-sheet/{projectId}', [ProjectController::class, 'getProjectGoogleSheet'])->name('api.project-google-sheet.get');
+    Route::post('api/create-project-sheet', [ProjectController::class, 'createProjectGoogleSheet'])->name('api.create-project-sheet');
+    Route::get('api/project-sheet-data/{projectId}', [ProjectController::class, 'getProjectSheetData'])->name('api.project-sheet-data');
+    
+    // Render routes
+    Route::get('project/{projectId}/render', [RenderController::class, 'show'])->name('project.render');
+    Route::post('project/{projectId}/render', [RenderController::class, 'store'])->name('project.render.store');
+    Route::delete('project/{projectId}/render/{renderId}', [RenderController::class, 'destroy'])->name('project.render.destroy');
+    Route::get('project/{projectId}/render/{renderId}/download', [RenderController::class, 'download'])->name('project.render.download');
+});
+
+// Render API routes (outside auth group)
+Route::middleware('auth')->group(function () {
+    Route::post('api/start-render', [ProjectController::class, 'startRender'])->name('api.start-render');
+    Route::get('api/render-history/{projectId}', [ProjectController::class, 'getRenderHistory'])->name('api.render-history');
 });
 
 Route::get('/test-db', function () {
     try {
         \DB::connection()->getPdo();
-        return "DB Connected ✅";
+        
+        // Test if user_block_settings table exists
+        $tables = \DB::select("SHOW TABLES LIKE 'user_block_settings'");
+        if (empty($tables)) {
+            return "DB Connected ✅ but user_block_settings table not found ❌";
+        }
+        
+        return "DB Connected ✅ and user_block_settings table exists ✅";
     } catch (\Exception $e) {
         return "DB ERROR ❌: " . $e->getMessage();
     }
