@@ -50,18 +50,18 @@ class ProjectController extends Controller
         $project->resolution = $validated['resolution'] ?? null;
         $project->status = 'no_status';
 
-        dd(storage_path('app/google/service-account.json'));
-        $sheetService = new GoogleSheetService();
-        $result = $sheetService->createSheet('Demo Sheet');
-        dd($result);
-        if ($result) {
-            return response()->json([
-                'message' => 'Sheet created successfully!',
-                'url' => $result['url'],
-            ]);
-        } else {
-            return response()->json(['error' => 'Failed to create sheet'], 500);
-        }
+        // dd(storage_path('app/google/service-account.json'));
+        // $sheetService = new GoogleSheetService();
+        // $result = $sheetService->createSheet('Demo Sheet');
+        // // dd($result);
+        // if ($result) {
+        //     return response()->json([
+        //         'message' => 'Sheet created successfully!',
+                // 'url' => $result['url'],
+        //     ]);
+        // } else {
+        //     return response()->json(['error' => 'Failed to create sheet'], 500);
+        // }
         $project->user_id = auth()->user()->id;
         $project->save();
 

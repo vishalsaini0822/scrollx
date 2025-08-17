@@ -1,0 +1,23 @@
+SCROLLX.IO VIDEO SPECIFICATIONS
+================================
+
+Project Name: Windows Compatible Test
+Generated: 2025-08-02 19:20:09
+
+VIDEO SETTINGS:
+- Resolution: 1280 × 720 pixels
+- Frame Rate: 30 fps
+- Duration: 15 seconds
+- Format: 
+- Speed: normal/10
+
+CREDITS DATA (4 items):
+================
+1. [TITLE] Windows Media Player Test
+2. [CREDIT] Director - ScrollX.io
+3. [CREDIT] Producer - Video Generator
+4. [NAME] Test User
+
+
+NOTE: This file contains the specifications for your video project.
+For actual video generation, professional tools like FFmpeg are required.

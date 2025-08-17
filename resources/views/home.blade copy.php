@@ -64,10 +64,9 @@
     <!--BANNER HTML START -->
     <div class="hero-banner">
         <div class="container">
-            <h1>Create End Credits <br> Easy and Fast</h1>
-            <p>No more tedious, time-consuming tasks. Enjoy the flexibility to customize your end credits, access a
-                diverse library of templates, and render them in a matter of minutes.</p>
-            <a href="{{url('register')}}" target="_blank" class="hero-btn btn-style">JOIN TO TRY FOR FREE</a>
+            <h1>Professional End Credits <br> Made Simple</h1>
+            <p>Transform your film's closing moments with stunning, customizable end credits. From Hollywood-quality templates to lightning-fast rendering, create credits that leave a lasting impression on your audience.</p>
+            <a href="{{url('register')}}" target="_blank" class="hero-btn btn-style">START CREATING FOR FREE</a>
             <div class="hero-bottom">
                 <div class="video-bg">
                     <img src="img/video-bg.jpg" alt="video-bg" class="w-100">
@@ -96,21 +95,20 @@
                         <div class="prop-img1">
                             <img src="img/rectangle.png" alt="rectangle">
                         </div>
-                        <h2>Build <br> End Credits
+                        <h2>Craft <br> End Credits
                             <span class="in-span">
                                 <div class="prop-img2">
                                     <img src="img/star-line.png" alt="star-line">
                                 </div>
-                                in
+                                with
                                 <div class="d-flex star-imgs">
                                     <img src="img/red-star.png" alt="red-star">
                                     <img src="img/green-star.png" alt="green-star">
-                                </div> 3 Easy
+                                </div> Professional
                             </span>
-                            <span class="last-step">Steps</span>
+                            <span class="last-step">Precision</span>
                         </h2>
-                        <p>ScrollX.io is your all-in-one solution for seamless, professional, and hassle-free credit
-                            design and rendering.</p>
+                        <p>ScrollX.io delivers cinema-quality end credits with unmatched speed and customization. From indie films to blockbusters, create credits that match your vision perfectly.</p>
                     </div>
                 </div>
             </div>
@@ -130,8 +128,8 @@
                         <img src="img/icon-2.png" alt="icon">
                     </div>
                     <div class="credits-title">
-                        <h6>Choose your style</h6>
-                        <p>Choose from our professionally designed templates or customize your own unique look.</p>
+                        <h6>Hollywood-Grade Templates</h6>
+                        <p>Access our exclusive collection of award-winning credit designs. Each template is crafted by industry professionals and fully customizable to match your film's aesthetic.</p>
                     </div>
                 </div>
                 <div class="credits-inn credits-inn-three">
@@ -139,9 +137,8 @@
                         <img src="img/icon-3.png" alt="icon">
                     </div>
                     <div class="credits-title">
-                        <h6>Instant Render</h6>
-                        <p>Experience lightning-fast rendering times, transforming your credits in minutes, not hours.
-                        </p>
+                        <h6>Lightning-Fast Rendering</h6>
+                        <p>Our advanced cloud infrastructure delivers 4K renders in under 5 minutes. No more overnight waits - get broadcast-quality credits ready for your timeline instantly.</p>
                     </div>
                 </div>
             </div>
@@ -169,8 +166,8 @@
     <div class="customizable-template-sec" id="customizabletemplate">
         <div class="container">
             <div class="inner-wrap01">
-                <h2 class="customizable-title">Customizable<br><span>Templates</span></h2>
-                <p>Choose from our diverse library professionally designed or customize your own unique look.</p>
+                <h2 class="customizable-title">Premium<br><span>Templates</span></h2>
+                <p>From minimalist elegance to cinematic grandeur - discover templates used by Emmy-winning productions and customize them to tell your story.</p>
             </div>
         </div>
         <div class="full-bg">
@@ -182,15 +179,13 @@
 
     <!-- HOW IT WORKS START -->
     <div class="howit-works-sec">
-        <h2>How <span>ScrollX.io</span> works?</h2>
+        <h2>The <span>ScrollX.io</span> Advantage</h2>
         <div class="howit-works-steps">
             <div class="container">
                 <div class="left-panel">
-                    <div class="sync-credits-badge">Sync Credits</div>
+                    <div class="sync-credits-badge">Smart Integration</div>
                     <p class="description">
-                        Connects directly to Google Sheets, automatically updating your end
-                        credits. Say goodbye to manual data entry and keep your credits up to date
-                        effortlessly.
+                        Our proprietary sync technology connects with Google Sheets, production management tools, and direct CSV imports. Real-time updates ensure your credits are always current, from pre-production to final cut.
                     </p>
                 </div>
             </div>
@@ -206,9 +201,8 @@
             </div>
             <div class="container">
                 <div class="left-panel step02">
-                    <div class="sync-credits-badge">Quick Templates</div>
-                    <p class="description">Discover a library of ready-to-use templates, making it a breeze to create
-                        stunning end credits. Find the perfect style, customize it, and save time with ScrollX.
+                    <div class="sync-credits-badge">Industry Templates</div>
+                    <p class="description">Choose from our curated collection of templates inspired by blockbuster films, indie darlings, and award-winning documentaries. Each design is optimized for different genres and storytelling styles.
                     </p>
                 </div>
             </div>
@@ -237,13 +231,13 @@
     <!-- Enjoy unlimited renders START -->
     <div class="more-things">
         <div class="container">
-            <a href="{{url('register')}}" class="btn-style">Join to explore all features</a>
+            <a href="{{url('register')}}" class="btn-style">Experience Professional Quality</a>
             <div class="more-things-title cm-title">
-                <h2>Missed entering a credit? <br>
-                    Enjoy unlimited renders, unlimited versions, <br>and never miss a beat.</h2>
+                <h2>Need a quick revision? <br>
+                    Unlimited renders, instant updates, <br>and studio-grade quality every time.</h2>
             </div>
             <div class="love-quote">
-                <span>More things to love about us</span>
+                <span>Why filmmakers choose ScrollX</span>
             </div>
             <div class="count-sec">
                 <div class="count-col">
@@ -254,9 +248,8 @@
                     </div>
                     <div class="count-col-rgt">
                         <div class="count-text">
-                            <span>Lifetime Project Access</span>
-                            <p>Your projects remain accessible indefinitely, allowing you to revisit, update, or enhance
-                                your end credits whenever inspiration strikes.</p>
+                            <span>Permanent Project Archive</span>
+                            <p>Your projects are stored securely in our cloud forever. Access, modify, and re-render any project years later - perfect for franchise films, sequels, or updated director's cuts.</p>
                         </div>
                     </div>
                 </div>
@@ -269,9 +262,8 @@
                     </div>
                     <div class="count-col-rgt">
                         <div class="count-text">
-                            <span>Project Duplication</span>
-                            <p>Save time by replicating your setups, so you can create multiple end credits with ease,
-                                each tailored to your unique projects.</p>
+                            <span>Smart Project Cloning</span>
+                            <p>Instantly duplicate successful setups for new projects. Perfect for production companies working on multiple films or creating series with consistent branding across episodes.</p>
                         </div>
                     </div>
                 </div>
@@ -284,9 +276,8 @@
                     </div>
                     <div class="count-col-rgt">
                         <div class="count-text">
-                            <span>Unlimited Renders</span>
-                            <p>Say goodbye to rendering restrictions and create as many end credits as you desire,
-                                making it easy to perfect every detail of your projects.</p>
+                            <span>Zero-Limit Rendering</span>
+                            <p>No caps, no restrictions, no surprise charges. Render as many versions as needed for different cuts, festivals, or distribution requirements - all included in your subscription.</p>
                         </div>
                     </div>
                 </div>
@@ -299,9 +290,8 @@
                     </div>
                     <div class="count-col-rgt">
                         <div class="count-text">
-                            <span>Real Time Preview</span>
-                            <p>Witness your credits come to life as you make changes, ensuring they look perfect before
-                                final rendering. It's your instant creative canvas!</p>
+                            <span>Live Preview Engine</span>
+                            <p>See every change instantly with our real-time preview technology. No guesswork - watch your credits animate exactly as they'll appear in the final render, complete with timing and effects.</p>
                         </div>
                     </div>
                 </div>

@@ -48,6 +48,26 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'handleGoogleC
 Route::get('/forgot-password', [PasswordResetController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/test-google-sheet', [SheetController::class, 'createSheet']);
+
+// Test Google API connection
+Route::get('/test-google-api', function () {
+    try {
+        $googleService = new \App\Services\GoogleSheetService();
+        $result = $googleService->testApiConnection();
+        return response()->json($result, $result['success'] ? 200 : 500);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'error' => $e->getMessage(),
+            'suggestions' => [
+                'Check if service-account.json file exists',
+                'Enable Google Sheets API in Google Cloud Console',
+                'Enable Google Drive API in Google Cloud Console',
+                'Verify service account has proper permissions'
+            ]
+        ], 500);
+    }
+});
 Route::get('/test-google-sheet/{id}', [SheetController::class, 'showSheet'])->name('sheet.show');
 Route::get('/api/sheet-data', [SheetController::class, 'getSheetData'])->name('sheet.data');
 Route::get('/api/test-direct-sheet', function() {

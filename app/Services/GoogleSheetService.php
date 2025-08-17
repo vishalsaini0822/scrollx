@@ -21,62 +21,79 @@ class GoogleSheetService
                     \Google_Service_Drive::DRIVE_FILE,
                     \Google_Service_Drive::DRIVE_METADATA,
                 ]);
-        $this->client->setAuthConfig(storage_path('app/google/service-account.json'));
+        
+        $serviceAccountPath = storage_path('app/google/service-account.json');
+        if (!file_exists($serviceAccountPath)) {
+            throw new \Exception('Service account file not found at: ' . $serviceAccountPath);
+        }
+        
+        $this->client->setAuthConfig($serviceAccountPath);
         $this->sheets = new Google_Service_Sheets($this->client);
     }
 
     // Create a new spreadsheet
     public function createSheet($title = 'New Sheet from scrollx')
     {
-        $spreadsheet = new Google_Service_Sheets_Spreadsheet([
-            'properties' => new Google_Service_Sheets_SpreadsheetProperties([
-                'title' => $title
-            ])
-        ]);
-
-        $createdSheet = $this->sheets->spreadsheets->create($spreadsheet);
-
-        // IMPORTANT: Share your Google Drive folder or the created sheet with the service account email as an editor.
-        // You can find the service account email in your service-account.json file under the "client_email" field.
-        // Example: share the folder or file in Google Drive UI with: your-service-account@your-project.iam.gserviceaccount.com
-
-        // Optionally, set permissions programmatically if the Drive API is enabled and the service account has sharing rights.
         try {
-            $driveService = new \Google_Service_Drive($this->client);
-
-            // Share with your own Google account email (replace with your email)
-            $userPermission = new \Google_Service_Drive_Permission([
-                'type' => 'user',
-                'role' => 'writer',
-                'emailAddress' => 'bajranginfotech89@gmail.com' // <-- Replace with your Google account email
+            $spreadsheet = new Google_Service_Sheets_Spreadsheet([
+                'properties' => new Google_Service_Sheets_SpreadsheetProperties([
+                    'title' => $title
+                ])
             ]);
-            $driveService->permissions->create(
-                $createdSheet->spreadsheetId,
-                $userPermission,
-                ['fields' => 'id', 'sendNotificationEmail' => false]
-            );
 
-            // Optionally, keep the 'anyone' permission if you want public write access (not recommended)
-            /*
-            $anyonePermission = new \Google_Service_Drive_Permission([
-                'type' => 'anyone',
-                'role' => 'writer',
-            ]);
-            $driveService->permissions->create(
-                $createdSheet->spreadsheetId,
-                $anyonePermission,
-                ['fields' => 'id']
-            );
-            */
+            $createdSheet = $this->sheets->spreadsheets->create($spreadsheet);
+
+            // IMPORTANT: Share your Google Drive folder or the created sheet with the service account email as an editor.
+            // You can find the service account email in your service-account.json file under the "client_email" field.
+            // Example: share the folder or file in Google Drive UI with: your-service-account@your-project.iam.gserviceaccount.com
+
+            // Optionally, set permissions programmatically if the Drive API is enabled and the service account has sharing rights.
+            try {
+                $driveService = new \Google_Service_Drive($this->client);
+
+                // Share with your own Google account email (replace with your email)
+                $userPermission = new \Google_Service_Drive_Permission([
+                    'type' => 'user',
+                    'role' => 'writer',
+                    'emailAddress' => 'bajranginfotech89@gmail.com' // <-- Replace with your Google account email
+                ]);
+                $driveService->permissions->create(
+                    $createdSheet->spreadsheetId,
+                    $userPermission,
+                    ['fields' => 'id', 'sendNotificationEmail' => false]
+                );
+
+                // Optionally, keep the 'anyone' permission if you want public write access (not recommended)
+                /*
+                $anyonePermission = new \Google_Service_Drive_Permission([
+                    'type' => 'anyone',
+                    'role' => 'writer',
+                ]);
+                $driveService->permissions->create(
+                    $createdSheet->spreadsheetId,
+                    $anyonePermission,
+                    ['fields' => 'id']
+                );
+                */
+            } catch (\Google_Service_Exception $e) {
+                // Log or handle the error, but do not stop execution
+                error_log('Failed to set permissions: ' . $e->getMessage());
+            }
+
+            return [
+                'spreadsheetId' => $createdSheet->spreadsheetId,
+                'url' => $createdSheet->spreadsheetUrl,
+            ];
+            
         } catch (\Google_Service_Exception $e) {
-            // Log or handle the error, but do not stop execution
-            // error_log('Failed to set permissions: ' . $e->getMessage());
+            // Parse the error message for better debugging
+            $errorMessage = $e->getMessage();
+            $httpCode = $e->getCode();
+            
+            throw new \Exception("Google Sheets API Error (HTTP {$httpCode}): {$errorMessage}. Please check: 1) Google Sheets API is enabled, 2) Google Drive API is enabled, 3) Service account has proper permissions");
+        } catch (\Exception $e) {
+            throw new \Exception("Failed to create Google Sheet: " . $e->getMessage());
         }
-
-        return [
-            'spreadsheetId' => $createdSheet->spreadsheetId,
-            'url' => $createdSheet->spreadsheetUrl,
-        ];
     }
         
     // Write data to the spreadsheet
@@ -167,6 +184,49 @@ class GoogleSheetService
             return $response->getValues();
         } catch (\Google_Service_Exception $e) {
             throw new \Exception('Error reading sheet data: ' . $e->getMessage());
+        }
+    }
+    
+    // Test if Google APIs are working properly
+    public function testApiConnection()
+    {
+        try {
+            // Try to get a list of spreadsheets (this requires minimal permissions)
+            $driveService = new \Google_Service_Drive($this->client);
+            $files = $driveService->files->listFiles([
+                'q' => "mimeType='application/vnd.google-apps.spreadsheet'",
+                'pageSize' => 1
+            ]);
+            
+            return [
+                'success' => true,
+                'message' => 'Google APIs are working correctly',
+                'service_account' => env('SERVICE_ACCOUNT_EMAIL', 'Not configured'),
+                'project_id' => $this->getProjectId()
+            ];
+        } catch (\Google_Service_Exception $e) {
+            return [
+                'success' => false,
+                'error' => $e->getMessage(),
+                'http_code' => $e->getCode(),
+                'service_account' => env('SERVICE_ACCOUNT_EMAIL', 'Not configured'),
+                'suggestions' => [
+                    'Enable Google Sheets API in Google Cloud Console',
+                    'Enable Google Drive API in Google Cloud Console',
+                    'Check service account permissions',
+                    'Verify service account JSON file is valid'
+                ]
+            ];
+        }
+    }
+    
+    private function getProjectId()
+    {
+        try {
+            $serviceAccountData = json_decode(file_get_contents(storage_path('app/google/service-account.json')), true);
+            return $serviceAccountData['project_id'] ?? 'Unknown';
+        } catch (\Exception $e) {
+            return 'Unable to read';
         }
     }
 }

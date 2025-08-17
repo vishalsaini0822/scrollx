@@ -28,16 +28,25 @@ class TemplateController extends Controller
             $validated['image'] = $imagePath;
         }
         $sheet = [];
+        $sheetCreated = false;
+        
         try {
-            
             $sheetService = new GoogleSheetService();
             $sheet = $sheetService->createSheet($validated['template_name'] . ' Sheet');
             $sheetService->writeData($sheet['spreadsheetId'], 'Sheet1!A1', [
                 ['Template Name', 'Image Path'],
                 [$validated['template_name'], $validated['image']],
             ]);
+            $sheetCreated = true;
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed to create Google Sheet: ' . $e->getMessage()], 500);
+            // Log the error but don't fail the template creation
+            error_log('Google Sheet creation failed: ' . $e->getMessage());
+            
+            // Set default values when Google Sheets fail
+            $sheet = [
+                'url' => null,
+                'spreadsheetId' => null
+            ];
         }
         
         $template = Template::create([
@@ -46,7 +55,13 @@ class TemplateController extends Controller
             'sheet_url' => !empty($sheet['url']) ? $sheet['url'] : null,
             'spreadsheetId' => !empty($sheet['spreadsheetId']) ? $sheet['spreadsheetId'] : null,
         ]);
-        return response()->json($template, 201);
+        
+        $response = $template->toArray();
+        if (!$sheetCreated) {
+            $response['warning'] = 'Template created successfully, but Google Sheet creation failed. Please enable billing in your Google Cloud Console to use Google Sheets API and Google Drive API.';
+        }
+        
+        return response()->json($response, 201);
     }
 
     // Display the specified template
